@@ -10,6 +10,8 @@ var findOrCreate = require("mongoose-findorcreate");
 let passport = require("passport");
 const { resolveSoa } = require("dns");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
+let Student = require("./models/student");
+const { clear } = require("console");
 let moveNext = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
@@ -41,7 +43,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 5 * 60 * 1000 },
+    cookie: { maxAge: 12 * 60 * 1000 },
     store: MongoStore.create({
       mongoUrl: process.env.CONNECT_MONGODB,
     }),
@@ -124,7 +126,26 @@ app.post("/logout", logoutNext, (req, res) => {
     }
   });
 });
-app.get("/dashboard", moveNext, (req, res) => {
-  console.log(req.user);
-  res.render("dashboard");
+app.get("/dashboard", moveNext, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.user.googleId });
+  let userFirstTime = true;
+  if (data === null) userFirstTime = false;
+  console.log(userFirstTime);
+  let username = req.user.username;
+  res.render("dashboard", { userFirstTime, username });
 });
+app.post("/dashboard", moveNext, async (req, res) => {
+  console.log(req.body);
+  res.redirect("/dashboard");
+});
+// yeh remove karna hai production ke phale //
+app.get("/test", async (req, res) => {
+  try {
+    let createStudent = new Student({ googleId: req.user.googleId });
+    await createStudent.save();
+    res.send("Successfully");
+  } catch (err) {
+    res.send(err);
+  }
+});
+// yeh remove karna hai production ke phale //

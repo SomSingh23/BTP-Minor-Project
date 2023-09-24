@@ -3,10 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
     <title>Document</title>
   </head>
   <body>
-    <h1>Sex Sooks</h1>
-    
+    <% if(userFirstTime){ %>
+    <h1>Form show hoga</h1>
+
+    <%} else {%>
+    <h1>Registration Form</h1>
+    <form action="/dashboard" method="POST">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value="<%=username%>"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="semester">Semester:</label>
+        <input type="number" id="semester" name="semester" required />
+      </div>
+      <div class="form-group">
+        <label for="currentYear">Current Year:</label>
+        <input type="number" id="currentYear" name="currentYear" required />
+      </div>
+      <div class="form-group">
+        <label for="misNo">MIS No:</label>
+        <input type="text" id="misNo" name="misNo" required />
+      </div>
+      <div class="form-group">
+        <label for="academicFee">Academic Fee Refernce Number:</label>
+        <input type="text" id="academicFee" name="academicFee" required />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <%}%>
   </body>
 </html>
