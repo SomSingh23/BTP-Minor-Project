@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Sign Up Page</title>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to the IIIT Pune Registration System</h1>
+      <p>Your one-stop solution for hassle-free registration</p>
+    </header>
+    <% if(_){ %>
+    <div class="student_dashboard_div">
+      <h2><a href="/dashboard"><%=name%> DashBoard</a></h2>
+    </div>
+    <div class="logout_div">
+      <h1><a href="/logout">Logout</a></h1>
+    </div>
+
+    <%} else {%>
+    <div class="button-container">
+      <a href="/auth/google" class="google-button">
+        <img src="google_logo.png" alt="Google Logo" class="google-logo" />
+        Sign up with Google
+      </a>
+    </div>
+    <%}%>
+
+    <section class="btech-project">
+      <h2>This is a part of our BTech Project</h2>
+      <p>
+        We are dedicated to improving the registration experience for IIIT Pune
+        students as a part of our Bachelor of Technology project.
+      </p>
+    </section>
+  </body>
+</html>

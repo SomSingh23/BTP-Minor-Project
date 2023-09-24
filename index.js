@@ -8,12 +8,20 @@ let session = require("express-session");
 const MongoStore = require("connect-mongo");
 var findOrCreate = require("mongoose-findorcreate");
 let passport = require("passport");
+const { resolveSoa } = require("dns");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 let moveNext = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect("/auth/google");
+  }
+};
+let logoutNext = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/");
   }
 };
 mongoose
@@ -26,6 +34,7 @@ mongoose
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 app.use(express.json());
 app.use(
   session({
@@ -85,20 +94,36 @@ app.get(
   "/google/api/auth",
   passport.authenticate("google", { failureRedirect: "/" }),
   function (req, res) {
-    // Successful authentication, redirect to new.
-    res.redirect("/restricted");
+    // Successful authentication, Now redirect .
+    res.redirect("/");
   }
 );
 
 // google auth routes BTP-SEM-5 //
 app.get("/", (req, res) => {
-  res.render("test");
+  let _ = false;
+  let name = "";
+  if (req.user !== undefined) {
+    _ = true;
+    name = req.user.username;
+  }
+
+  res.render("home", { _, name });
 });
-app.get("/login", (req, res) => {
-  res.send("Welcome to Login Page");
+
+app.get("/logout", logoutNext, (req, res) => {
+  res.render("logout");
 });
-app.get("/restricted", moveNext, (req, res) => {
-  res.send(
-    `You have visited a restricted Route your name is ${req.user.username} 🧑‍💻`
-  );
+app.post("/logout", logoutNext, (req, res) => {
+  console.log("logout post route called");
+  req.logout((err) => {
+    if (err) {
+      return res.status(400).send("error");
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+app.get("/dashboard", moveNext, (req, res) => {
+  res.send("dash");
 });
