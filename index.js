@@ -17,7 +17,7 @@ let moveNext = (req, res, next) => {
   }
 };
 mongoose
-  .connect("mongodb://127.0.0.1:27017/BTP_SEMESTER_5")
+  .connect(process.env.CONNECT_MONGODB)
   .then(() => {
     console.log("Connected to MongoDB Mumbai Servers");
   })
@@ -29,12 +29,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   session({
-    secret: "somsinghlodhi",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 5 * 60 * 1000 },
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/BTP_SEMESTER_5",
+      mongoUrl: process.env.CONNECT_MONGODB,
     }),
   })
 );
