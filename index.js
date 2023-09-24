@@ -99,6 +99,6 @@ app.get("/login", (req, res) => {
 });
 app.get("/restricted", moveNext, (req, res) => {
   res.send(
-    `You have visited a restricted Route your name is ${req.user.username}`
+    `You have visited a restricted Route your name is ${req.user.username} 🧑‍💻`
   );
 });
