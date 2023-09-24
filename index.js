@@ -125,5 +125,6 @@ app.post("/logout", logoutNext, (req, res) => {
   });
 });
 app.get("/dashboard", moveNext, (req, res) => {
-  res.send("dash");
+  console.log(req.user);
+  res.render("dashboard");
 });
