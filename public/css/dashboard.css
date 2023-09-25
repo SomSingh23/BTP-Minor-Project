@@ -68,3 +68,23 @@ button {
 button:hover {
   background-color: #357ae8;
 }
+.logout_div {
+  text-align: center;
+  margin: 80px auto;
+  width: 60%;
+}
+
+.logout_div h1 a {
+  background-color: #f44336;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.logout_div h1 a:hover {
+  background-color: #d32f2f;
+}

@@ -41,7 +41,27 @@ h2.successful {
 }
 
 h2.pending {
+  background-color: #f35714;
+  color: #fff;
+  border-color: #ef2913f0;
+}
+.logout_div {
+  text-align: center;
+  margin: 80px auto;
+  width: 60%;
+}
+
+.logout_div h1 a {
   background-color: #f44336;
   color: #fff;
-  border-color: #f44336;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.logout_div h1 a:hover {
+  background-color: #d32f2f;
 }

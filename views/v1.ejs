@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <h1>Pending Student Verification List:-</h1>
+    <ol>
+      <% for( let x of data ) { %> <%if(!x.verification1) { %>
+      <li><a href="/v1/<%=x.googleId%>"><%=x.username%></a></li>
+      <%}%> <% } %>
+    </ol>
+  </body>
+</html>

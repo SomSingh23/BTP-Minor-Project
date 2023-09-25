@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/verification.css" />
   </head>
   <body>
-    <h1>Verification Status</h1>
+    <h1><em>Verification Status</em></h1>
     <% if(v1){ %>
     <h2 class="successful">Verification 1 Successful</h2>
     <%} else{ %>
@@ -25,5 +25,8 @@
     <%} else{ %>
     <h2 class="pending">Verification 3 Pending</h2>
     <%}%>
+    <div class="logout_div">
+      <h1><a href="/logout">Logout</a></h1>
+    </div>
   </body>
 </html>

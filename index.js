@@ -134,7 +134,7 @@ app.get("/dashboard", moveNext, async (req, res) => {
     userFirstTime = false;
     return res.render("dashboard", { userFirstTime, username });
   }
-  console.log(data);
+
   let v1 = data.verification1;
   let v2 = data.verification2;
   let v3 = data.verification3;
@@ -142,7 +142,6 @@ app.get("/dashboard", moveNext, async (req, res) => {
 });
 app.post("/dashboard", moveNext, async (req, res) => {
   try {
-    console.log(req.body);
     let newStudent = new Student({
       username: req.user.username,
       googleId: req.user.googleId,
@@ -158,6 +157,54 @@ app.post("/dashboard", moveNext, async (req, res) => {
     res.status(400).redirect("/dashboard");
   }
 });
+
+app.get("/v1", moveNext, async (req, res) => {
+  /*
+  This is currently just a prototype,
+  so anyone can access this route and
+  verify the v1 process of students.
+  However, this will change in the future. 🧑‍💻🧑‍💻🤗*/
+  let data = await Student.find({});
+  console.log(data);
+  res.render("v1", { data });
+});
+app.get("/v1/:id", moveNext, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data == null) {
+    return res.redirect("/v1");
+  }
+  res.render("v1_student", {
+    username: data.username,
+    googleId: data.googleId,
+    misNo: data.misNo,
+    semester: data.semester,
+    currentYear: data.currentYear,
+    messFee: data.messFee,
+  });
+});
+
+app.post("/v1/:id", moveNext, async (req, res) => {
+  if (req.body.verification === "yes") {
+    console.log("success v1");
+    await Student.updateOne(
+      {
+        googleId: req.params.id,
+      },
+      {
+        $set: {
+          verification1: true,
+        },
+      }
+    );
+  }
+  res.redirect("/v1");
+});
+// app.post("/v1", moveNext, async (req, res) => {
+//   console.log("/v1 post route");
+
+//   return res.redirect("/v1");
+// });
+
 // yeh remove karna hai production ke phale //
 // app.get("/test", async (req, res) => {
 //   try {

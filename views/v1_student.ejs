@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=username%></title>
+  </head>
+  <body>
+    <h1><%=username%> Details :-</h1>
+    <h2>Mis No = <%=misNo%></h2>
+    <h2>Semester = <%=semester%></h2>
+    <h2>Current Year = <%=currentYear%></h2>
+    <h2>Mess Fee Reference No = <%=messFee%></h2>
+
+    <form method="POST" action="/v1/<%=googleId%>">
+      <label for="verification">Do you want to verify <%=username%>?</label>
+      <select id="verification" name="verification">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
