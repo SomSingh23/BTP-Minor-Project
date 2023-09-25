@@ -165,7 +165,6 @@ app.get("/v1", moveNext, async (req, res) => {
   verify the v1 process of students.
   However, this will change in the future. 🧑‍💻🧑‍💻🤗*/
   let data = await Student.find({});
-  console.log(data);
   res.render("v1", { data });
 });
 app.get("/v1/:id", moveNext, async (req, res) => {
