@@ -1,0 +1,40 @@
+body,
+h1,
+ol,
+li,
+a {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  text-align: center;
+  margin-top: 30px;
+}
+h1 {
+  font-size: 38px;
+  color: #333;
+}
+
+ol {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #4285f4; /* Google Blue */
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #357ae8; /* Slightly darker blue on hover */
+}

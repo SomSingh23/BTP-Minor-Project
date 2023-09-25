@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%=username%></title>
+    <title><%= username %> Details</title>
+    <link rel="stylesheet" href="/css/v1_student.css" />
   </head>
   <body>
-    <h1><%=username%> Details :-</h1>
-    <h2>Mis No = <%=misNo%></h2>
-    <h2>Semester = <%=semester%></h2>
-    <h2>Current Year = <%=currentYear%></h2>
-    <h2>Mess Fee Reference No = <%=messFee%></h2>
-
-    <form method="POST" action="/v1/<%=googleId%>">
-      <label for="verification">Do you want to verify <%=username%>?</label>
+    <h1><%= username %> Details 👇</h1>
+    <div class="user-info">
+      <h2>Mis No: <%= misNo %></h2>
+      <h2>Semester: <%= semester %></h2>
+      <h2>Current Year: <%= currentYear %></h2>
+      <h2>Mess Fee Reference No: <%= messFee %></h2>
+    </div>
+    <form method="POST" action="/v1/<%= googleId %>">
+      <label for="verification">Do you want to verify <%= username %>?</label>
       <select id="verification" name="verification">
         <option value="yes">Yes</option>
         <option value="no">No</option>
