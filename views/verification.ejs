@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>verification</title>
+    <title>Verification</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Lato:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/verification.css" />
   </head>
   <body>
     <h1>Verification Status</h1>
     <% if(v1){ %>
-    <h2>Verficiation 1 Successful</h2>
+    <h2 class="successful">Verification 1 Successful</h2>
     <%} else{ %>
-    <h2>Verficiation 1 Pending</h2>
+    <h2 class="pending">Verification 1 Pending</h2>
     <%}%> <% if(v2){ %>
-    <h2>Verficiation 2 Successful</h2>
+    <h2 class="successful">Verification 2 Successful</h2>
     <%} else{ %>
-    <h2>Verficiation 2 Pending</h2>
+    <h2 class="pending">Verification 2 Pending</h2>
     <%}%> <% if(v3){ %>
-    <h2>Verficiation 3 Successful</h2>
+    <h2 class="successful">Verification 3 Successful</h2>
     <%} else{ %>
-    <h2>Verficiation 3 Pending</h2>
+    <h2 class="pending">Verification 3 Pending</h2>
     <%}%>
   </body>
 </html>

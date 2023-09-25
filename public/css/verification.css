@@ -1,0 +1,47 @@
+body,
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  background-color: #f5f5f5;
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+h2 {
+  display: block;
+  width: 800px;
+  font-size: 24px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+  font-family: "Lato", Arial, sans-serif;
+}
+
+h2.successful {
+  background-color: #4caf50;
+  color: #fff;
+  border-color: #4caf50;
+}
+
+h2.pending {
+  background-color: #f44336;
+  color: #fff;
+  border-color: #f44336;
+}

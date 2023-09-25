@@ -13,7 +13,7 @@ let Schema = new mongoose.Schema({
   currentYear: Number,
   misNo: String,
   isRegistered: Boolean,
-  academicFee: String,
+  messFee: String,
 });
 let Student = mongoose.model("Student", Schema);
 module.exports = Student;
