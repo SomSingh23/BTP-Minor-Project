@@ -43,7 +43,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 20 * 60 * 1000 },
+    cookie: { maxAge: 25 * 60 * 1000 },
     store: MongoStore.create({
       mongoUrl: process.env.CONNECT_MONGODB,
     }),
@@ -134,7 +134,11 @@ app.get("/dashboard", moveNext, async (req, res) => {
     userFirstTime = false;
     return res.render("dashboard", { userFirstTime, username });
   }
-  res.render("verification");
+  console.log(data);
+  let v1 = data.verification1;
+  let v2 = data.verification2;
+  let v3 = data.verification3;
+  res.render("verification", { v1, v2, v3 });
 });
 app.post("/dashboard", moveNext, async (req, res) => {
   try {
