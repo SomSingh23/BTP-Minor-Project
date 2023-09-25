@@ -43,7 +43,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 12 * 60 * 1000 },
+    cookie: { maxAge: 20 * 60 * 1000 },
     store: MongoStore.create({
       mongoUrl: process.env.CONNECT_MONGODB,
     }),
@@ -129,23 +129,39 @@ app.post("/logout", logoutNext, (req, res) => {
 app.get("/dashboard", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
   let userFirstTime = true;
-  if (data === null) userFirstTime = false;
-  console.log(userFirstTime);
   let username = req.user.username;
-  res.render("dashboard", { userFirstTime, username });
+  if (data === null) {
+    userFirstTime = false;
+    return res.render("dashboard", { userFirstTime, username });
+  }
+  res.render("verification");
 });
 app.post("/dashboard", moveNext, async (req, res) => {
-  console.log(req.body);
-  res.redirect("/dashboard");
-});
-// yeh remove karna hai production ke phale //
-app.get("/test", async (req, res) => {
   try {
-    let createStudent = new Student({ googleId: req.user.googleId });
-    await createStudent.save();
-    res.send("Successfully");
+    console.log(req.body);
+    let newStudent = new Student({
+      username: req.user.username,
+      googleId: req.user.googleId,
+      isRegistered: false,
+      verification1: false,
+      verification2: false,
+      verification3: false,
+      ...req.body,
+    });
+    await newStudent.save();
+    res.redirect("/dashboard");
   } catch (err) {
-    res.send(err);
+    res.status(400).redirect("/dashboard");
   }
 });
+// yeh remove karna hai production ke phale //
+// app.get("/test", async (req, res) => {
+//   try {
+//     let createStudent = new Student({ googleId: req.user.googleId });
+//     await createStudent.save();
+//     res.send("Successfully");
+//   } catch (err) {
+//     res.send(err);
+//   }
+// });
 // yeh remove karna hai production ke phale //
