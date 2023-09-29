@@ -138,6 +138,10 @@ app.get("/dashboard", moveNext, async (req, res) => {
   let v1 = data.verification1;
   let v2 = data.verification2;
   let v3 = data.verification3;
+  let v1_status = data.verification1Status;
+  if (v1_status !== "som") {
+    return res.render("v1_student_fail", { v1_status });
+  }
   res.render("verification", { v1, v2, v3 });
 });
 app.post("/dashboard", moveNext, async (req, res) => {
@@ -149,6 +153,9 @@ app.post("/dashboard", moveNext, async (req, res) => {
       verification1: false,
       verification2: false,
       verification3: false,
+      verification1Status: "som",
+      verification2Status: "som",
+      verification3Status: "som",
       ...req.body,
     });
     await newStudent.save();
@@ -157,6 +164,17 @@ app.post("/dashboard", moveNext, async (req, res) => {
     res.status(400).redirect("/dashboard");
   }
 });
+
+app.post("/dashboard/fail", moveNext, async (req, res) => {
+  if (req.body.ans === "no") {
+    return res.redirect("/");
+  }
+  // delete the user data from student model
+  console.log(req.body);
+  await Student.findOneAndDelete({ googleId: req.user.googleId });
+  return res.redirect("/dashboard");
+});
+// highly___protected/admin routes starts from here  //
 
 app.get("/v1", moveNext, async (req, res) => {
   /*
@@ -183,6 +201,11 @@ app.get("/v1/:id", moveNext, async (req, res) => {
 });
 
 app.post("/v1/:id", moveNext, async (req, res) => {
+  let _check = await Student.findOne({ googleId: req.params.id });
+  if (_check === null) {
+    console.log("someone doing bad stuff");
+    return res.redirect("/v1");
+  }
   if (req.body.verification === "yes") {
     console.log("success v1");
     await Student.updateOne(
@@ -195,7 +218,31 @@ app.post("/v1/:id", moveNext, async (req, res) => {
         },
       }
     );
+  } else {
+    return res.redirect(`/v1/${req.params.id}/fail`);
   }
+  return res.redirect("/v1");
+});
+app.get("/v1/:id/fail", moveNext, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data === null) {
+    return res.redirect("/v1");
+  }
+  let username = data.username;
+  console.log(username);
+  res.render("v1_fail", { username, googleId: req.params.id });
+});
+app.post("/v1/:id/fail", moveNext, async (req, res) => {
+  await Student.updateOne(
+    {
+      googleId: req.params.id,
+    },
+    {
+      $set: {
+        verification1Status: req.body.reason,
+      },
+    }
+  );
   res.redirect("/v1");
 });
 // app.post("/v1", moveNext, async (req, res) => {
