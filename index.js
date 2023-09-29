@@ -104,7 +104,7 @@ app.get(
 // google auth routes BTP-SEM-5 //
 app.get("/", (req, res) => {
   let _ = false;
-  let name = "";
+  let name = "";  
   if (req.user !== undefined) {
     _ = true;
     name = req.user.username;

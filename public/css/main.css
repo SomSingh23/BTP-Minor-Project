@@ -64,7 +64,13 @@ header p {
   text-align: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
+.btech-project2 {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 220px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 .btech-project h2 {
   font-size: 24px;
   color: #333;
@@ -72,6 +78,16 @@ header p {
 }
 
 .btech-project p {
+  font-size: 16px;
+  color: #555;
+}
+.btech-project2 h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.btech-project2 p {
   font-size: 16px;
   color: #555;
 }

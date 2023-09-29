@@ -53,14 +53,22 @@
         Sign up with Google
       </a>
     </div>
-    <%}%>
-
+    <%}%> <% if(_){%>
     <section class="btech-project">
-      <h2>This is a part of our BTech Project</h2>
+      <h2>This is a part of our B-Tech Project</h2>
       <p>
         We're working on making the registration process better for IIIT Pune
         students as part of our Bachelor of Technology project.
       </p>
     </section>
+    <%} else{%>
+    <section class="btech-project2">
+      <h2>This is a part of our B-Tech Project</h2>
+      <p>
+        We're working on making the registration process better for IIIT Pune
+        students as part of our Bachelor of Technology project.
+      </p>
+    </section>
+    <%}%>
   </body>
 </html>
