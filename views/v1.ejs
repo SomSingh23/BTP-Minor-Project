@@ -28,7 +28,7 @@
     <h1>Pending Student Verification List 👇</h1>
     <ol>
       <% for( let x of data ) { %> <%if(!x.verification1 &&
-      x.verification1Status==="som") { %>
+      x.verification1Status===process.env.STATUS) { %>
       <li><a href="/v1/<%=x.googleId%>"><%=x.username%></a></li>
       <%}%> <% } %>
     </ol>

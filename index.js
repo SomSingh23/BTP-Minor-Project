@@ -139,7 +139,7 @@ app.get("/dashboard", moveNext, async (req, res) => {
   let v2 = data.verification2;
   let v3 = data.verification3;
   let v1_status = data.verification1Status;
-  if (v1_status !== "som") {
+  if (v1_status !== process.env.STATUS) {
     return res.render("v1_student_fail", { v1_status });
   }
   res.render("verification", { v1, v2, v3 });
@@ -153,9 +153,9 @@ app.post("/dashboard", moveNext, async (req, res) => {
       verification1: false,
       verification2: false,
       verification3: false,
-      verification1Status: "som",
-      verification2Status: "som",
-      verification3Status: "som",
+      verification1Status: process.env.STATUS,
+      verification2Status: process.env.STATUS,
+      verification3Status: process.env.STATUS,
       ...req.body,
     });
     await newStudent.save();
