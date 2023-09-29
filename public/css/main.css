@@ -24,6 +24,7 @@ header h1 {
 
 header p {
   font-size: 18px;
+  color: rgb(255, 255, 0);
 }
 
 .button-container {
@@ -59,7 +60,7 @@ header p {
 .btech-project {
   background-color: #fff;
   padding: 20px;
-  margin-top: 200px;
+  margin-top: 30px;
   text-align: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -77,24 +78,40 @@ header p {
 .student_dashboard_div {
   background-color: #4285f4;
   color: #fff;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
-  margin: 60px auto;
-  width: 50%;
-  border-radius: 4px;
+  margin: 25px auto;
+  width: 42%;
+  border-radius: 6px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+.admin_dashboard {
+  background-color: #4285f4;
+  color: #fff;
 
+  padding: 10px;
+  text-align: center;
+  margin: 25px auto;
+  width: 42%;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 .student_dashboard_div h2 a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
 }
 
+.admin_dashboard h2 a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .logout_div {
   text-align: center;
-  margin: 80px auto;
-  width: 60%;
+  margin: 30px auto;
+  width: 50%;
 }
 
 .logout_div h1 a {
