@@ -76,6 +76,10 @@ header p {
   color: #333;
   margin-bottom: 10px;
 }
+.btech-project h2 a {
+  text-decoration: none;
+  color: blue;
+}
 
 .btech-project p {
   font-size: 16px;
