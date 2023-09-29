@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/v1_fail.css" />
     <title>Reason for Not Verifying Student</title>
   </head>
   <body>
-    <h1>Reason for Not Verifying <%= username %></h1>
+    <div class="reason"><h1>Reason for Not Verifying <%= username %></h1></div>
+
     <form action="/v1/<%=googleId%>/fail" method="POST">
       <label for="reason">Reason</label>
       <textarea
