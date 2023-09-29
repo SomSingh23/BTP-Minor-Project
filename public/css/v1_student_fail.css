@@ -1,0 +1,93 @@
+body,
+h1,
+h2,
+h3,
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  margin-top: 100px;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.fail {
+  background-color: #ff3f3f;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 500px;
+  max-width: 85%;
+}
+
+.fail h1 {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.reason {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 500px;
+  max-width: 85%;
+}
+
+.reason h2 em {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.restart {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 500px;
+  max-width: 85%;
+}
+
+.restart h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+  outline: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

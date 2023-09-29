@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/v1_student_fail.css" />
     <title>Verification Status</title>
   </head>
   <body>
-    <h1>Verification 1 has failed</h1>
-    <h2>Reason for failure: <%= v1_status %></h2>
-    <h3>Do you want to fill the form again and restart the process?</h3>
+    <div class="fail">
+      <h1>Verification 1 has failed</h1>
+    </div>
+    <div class="reason">
+      <h2>Reason</h2>
+      <h2><em><%= v1_status %></em></h2>
+    </div>
+    <div class="restart">
+      <h3>Do you want to fill the form again and restart the process?</h3>
+    </div>
+
     <form action="/dashboard/fail" method="post">
       <button name="ans" value="yes">Yes</button>
       <button name="ans" value="no">No</button>
