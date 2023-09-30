@@ -43,7 +43,23 @@
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<%=userEmail%>"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="misNo">MIS No:</label>
+        <input
+          type="text"
+          id="misNo"
+          name="misNo"
+          value="<%=userEmail.slice(0,9)%>"
+          readonly
+        />
       </div>
       <div class="form-group">
         <label for="semester">Semester:</label>
@@ -53,10 +69,7 @@
         <label for="currentYear">Current Year:</label>
         <input type="number" id="currentYear" name="currentYear" required />
       </div>
-      <div class="form-group">
-        <label for="misNo">MIS No:</label>
-        <input type="text" id="misNo" name="misNo" required />
-      </div>
+
       <div class="form-group">
         <label for="academicFee">Mess Fee Reference Number:</label>
         <input type="text" id="academicFee" name="messFee" required />

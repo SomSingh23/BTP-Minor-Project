@@ -4,6 +4,7 @@ let app = express();
 let mongoose = require("mongoose");
 let path = require("path");
 let User = require("./models/user");
+let Email = require("./models/email");
 let session = require("express-session");
 const MongoStore = require("connect-mongo");
 var findOrCreate = require("mongoose-findorcreate");
@@ -69,9 +70,23 @@ passport.use(
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL,
     },
-    function (accessToken, refreshToken, profile, cb) {
+    async function (accessToken, refreshToken, profile, cb) {
+      // yeh wala section new hai, taking email from user and saving it to Email model
+      // console.log(profile.emails[0].value);
+      let data = await Email.findOne({ googleId: profile.id });
+      if (data === null) {
+        let newData = new Email({
+          googleId: profile.id,
+          email: profile.emails[0].value,
+        });
+        await newData.save();
+      }
+      // yeh wala section new hai, taking email from user and saving it to Email model
       User.findOrCreate(
-        { googleId: profile.id, username: profile.displayName },
+        {
+          googleId: profile.id,
+          username: profile.displayName,
+        },
         function (err, user) {
           return cb(err, user);
         }
@@ -89,7 +104,7 @@ app.listen(process.env.PORT, () => {
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: ["profile"],
+    scope: ["profile", "email"],
   })
 );
 app.get(
@@ -129,10 +144,12 @@ app.post("/logout", logoutNext, (req, res) => {
 app.get("/dashboard", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
   let userFirstTime = true;
+  let data2 = await Email.findOne({ googleId: req.user.googleId });
+  let userEmail = data2.email;
   let username = req.user.username;
   if (data === null) {
     userFirstTime = false;
-    return res.render("dashboard", { userFirstTime, username });
+    return res.render("dashboard", { userFirstTime, username, userEmail });
   }
 
   let v1 = data.verification1;
@@ -245,6 +262,7 @@ app.post("/v1/:id/fail", moveNext, async (req, res) => {
   );
   res.redirect("/v1");
 });
+
 // app.post("/v1", moveNext, async (req, res) => {
 //   console.log("/v1 post route");
 
