@@ -19,7 +19,7 @@ h1 {
 
 h2 {
   font-size: 24px;
-  margin: 20px auto;
+  margin: 24px auto;
   padding: 15px;
   border: 2px solid #ddd;
   border-radius: 12px;
@@ -27,6 +27,8 @@ h2 {
   max-width: 70%;
 }
 .top {
+  font-family: "Kaushan Script", cursive;
+  font-family: "Playfair Display", serif;
   font-size: 60px;
 }
 h1,
