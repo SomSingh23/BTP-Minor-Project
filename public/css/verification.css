@@ -9,29 +9,28 @@ body {
   font-family: "Open Sans", Arial, sans-serif;
   background-color: #f5f5f5;
   text-align: center;
-  margin-top: 50px;
+  margin: 20px;
 }
 
 h1 {
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 30px;
+  font-size: 40px;
+  color: #000000;
+  margin: 20px 0;
 }
 
 h2 {
-  display: block;
-  width: 800px;
   font-size: 24px;
   margin: 20px auto;
-  padding: 10px;
+  padding: 15px;
   border: 2px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.747);
+  max-width: 70%;
 }
 
 h1,
 h2 {
-  font-family: "Lato", Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
 }
 
 h2.successful {
@@ -45,23 +44,48 @@ h2.pending {
   color: #fff;
   border-color: #ef2913f0;
 }
+
 .logout_div {
   text-align: center;
-  margin: 80px auto;
-  width: 60%;
+  margin: 40px auto;
+  max-width: 80%;
 }
 
 .logout_div h1 a {
-  background-color: #f44336;
+  background-color: #000000;
   color: #fff;
   display: inline-block;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 5px 10px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .logout_div h1 a:hover {
   background-color: #d32f2f;
+}
+.last_one {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+  .last_one {
+    width: 300px;
+  }
+  .logout_div {
+    max-width: 90%;
+  }
 }
