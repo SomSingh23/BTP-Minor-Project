@@ -27,10 +27,10 @@
   <body>
     <h1><%= username %> Details 👇</h1>
     <div class="user-info">
-      <h2>Mis No: <%= misNo %></h2>
-      <h2>Semester: <%= semester %></h2>
-      <h2>Current Year: <%= currentYear %></h2>
-      <h2>Mess Fee Reference No: <%= messFee %></h2>
+      <h2>Mis No: <em><%= misNo %></em></h2>
+      <h2>Semester: <em><%= semester %></em></h2>
+      <h2>Current Year: <em><%= currentYear %></em></h2>
+      <h2>Mess Fee Ref No: <em><%= messFee %></em></h2>
     </div>
     <form method="POST" action="/v1/<%= googleId %>">
       <label for="verification">Do you want to verify <%= username %>?</label>
