@@ -263,6 +263,11 @@ app.post("/v1/:id/fail", moveNext, async (req, res) => {
   res.redirect("/v1");
 });
 
+// invalid route ke liye //
+app.get("*", (req, res) => {
+  res.status(404).render("error_404");
+});
+// invalid route ke liye //
 // app.post("/v1", moveNext, async (req, res) => {
 //   console.log("/v1 post route");
 
