@@ -270,7 +270,7 @@ app.post("/dashboard", moveNext, async (req, res) => {
                 <p>Thank you for choosing us!</p>
             </div>
             <div class="footer">
-                <p>&copy; 2023 BTP-5 IIIT Pune</p>
+                <p>&copy; 2023 Som Singh Lodhi</p>
             </div>
         </div>
     </body>
