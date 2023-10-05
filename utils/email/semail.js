@@ -13,6 +13,7 @@ const sendEmail = async (to, subject, messageContent) => {
           pass: process.env.PASS,
         },
         from: process.env.EMAIL, // adding <<from>>> to check if email still goes to spam folder
+        replyTo: process.env.EMAIL2, // adding reply
       });
 
       const message = {
