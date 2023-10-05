@@ -8,11 +8,11 @@ const sendEmail = async (to, subject, messageContent) => {
         host: "smtp.gmail.com",
         port: 465, // changing port 587 to 465 :)
         secure: true, // false -> true
-
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASS,
         },
+        from: process.env.EMAIL, // adding <<from>>> to check if email still goes to spam folder
       });
 
       const message = {
