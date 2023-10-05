@@ -165,6 +165,11 @@ app.get("/dashboard", moveNext, async (req, res) => {
 });
 app.post("/dashboard", moveNext, async (req, res) => {
   try {
+    let __d = await Student.findOne({ googleId: req.user.googleId });
+    if (__d !== null) {
+      console.log("multiple clicks");
+      return res.redirect("/dashboard");
+    }
     let newStudent = new Student({
       username: req.user.username,
       googleId: req.user.googleId,
@@ -178,13 +183,17 @@ app.post("/dashboard", moveNext, async (req, res) => {
       ...req.body,
     });
     await newStudent.save();
-    let message = await formSubmitMessage(req.user.username); // always resolved
-    await sendEmail(
-      req.body.email,
-      "Thank you for filling out the registration form",
-      message
-    );
     res.redirect("/dashboard");
+    try {
+      let message = await formSubmitMessage(req.user.username); // always resolved
+      await sendEmail(
+        req.body.email,
+        "Thank you for filling out the registration form",
+        message
+      );
+    } catch (err) {
+      console.log(err);
+    }
   } catch (err) {
     res.status(400).redirect("/dashboard");
   }
