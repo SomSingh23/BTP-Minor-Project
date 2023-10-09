@@ -9,6 +9,11 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
 }
+/* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
+}
+/* hiding scrollbar */
 
 header {
   background-color: #4285f4;
