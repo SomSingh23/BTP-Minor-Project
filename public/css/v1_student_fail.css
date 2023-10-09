@@ -18,7 +18,11 @@ body {
   height: 100vh;
   flex-direction: column;
 }
-
+/* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
+}
+/* hiding scrollbar */
 .fail {
   background-color: #ff3f3f;
   padding: 20px;

@@ -8,7 +8,11 @@ body {
   align-items: center;
   height: 100vh;
 }
-
+/* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
+}
+/* hiding scrollbar */
 .error-container {
   background-color: #ffffff;
   border-radius: 10px;

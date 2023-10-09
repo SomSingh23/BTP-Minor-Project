@@ -17,7 +17,11 @@ body {
   align-items: center;
   height: 100vh;
 }
-
+/* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
+}
+/* hiding scrollbar */
 .container {
   text-align: center;
 }

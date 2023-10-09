@@ -11,7 +11,11 @@ body {
   text-align: center;
   margin: 20px;
 }
-
+/* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
+}
+/* hiding scrollbar */
 h1 {
   color: #000000;
   margin: 20px 0;

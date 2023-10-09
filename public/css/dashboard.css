@@ -15,7 +15,11 @@ body {
   text-align: center;
   margin: 50px auto;
 }
-
+/* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
+}
+/* hiding scrollbar */
 h1 {
   font-size: 28px;
   color: #333;

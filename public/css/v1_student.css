@@ -13,7 +13,11 @@ body {
   background-color: #f2f2f2;
   text-align: center;
   margin-top: 20px;
+} /* hiding scrollbar */
+::-webkit-scrollbar {
+  width: 0em;
 }
+/* hiding scrollbar */
 .user-info {
   width: 500px;
   height: 250px;
