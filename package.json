@@ -1,6 +1,9 @@
 {
   "engines": {
-    "node": "16.14.2"
+    "node": ">=16.14.2"
+  },
+  "scripts": {
+    "start": "node index.js"
   },
   "dependencies": {
     "connect-mongo": "^5.0.0",
