@@ -14,6 +14,8 @@ var GoogleStrategy = require("passport-google-oauth20").Strategy;
 let Student = require("./models/student");
 let sendEmail = require("./utils/email/semail");
 let formSubmitMessage = require("./utils/functions/formSubmissionMessage");
+let redis_client = require("./utils/redis/clientConfigure");
+let RedisStore = require("connect-redis").default;
 const { clear } = require("console");
 let moveNext = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -46,10 +48,11 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 3600000, httpOnly: true },
-    store: MongoStore.create({
+    cookie: { maxAge: 1000 * 60 * 15, httpOnly: true },
+    store: new RedisStore({ client: redis_client }),
+    /* store: MongoStore.create({
       mongoUrl: process.env.CONNECT_MONGODB,
-    }),
+    }) */
   })
 );
 // -------------------------Auth----------------------------------- //
