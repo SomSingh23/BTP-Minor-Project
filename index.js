@@ -9,14 +9,12 @@ let session = require("express-session");
 const MongoStore = require("connect-mongo");
 var findOrCreate = require("mongoose-findorcreate");
 let passport = require("passport");
-const { resolveSoa } = require("dns");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 let Student = require("./models/student");
 let sendEmail = require("./utils/email/semail");
 let formSubmitMessage = require("./utils/functions/formSubmissionMessage");
 let redis_client = require("./utils/redis/clientConfigure");
 let RedisStore = require("connect-redis").default;
-const { clear } = require("console");
 let moveNext = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
@@ -52,6 +50,7 @@ app.use(
     store: new RedisStore({ client: redis_client }),
     /* store: MongoStore.create({
       mongoUrl: process.env.CONNECT_MONGODB,
+      // not storing session on mongoDB use to slow speed :(, but could use later on.... if free redis DB goes out of storage
     }) */
   })
 );
@@ -79,6 +78,11 @@ passport.use(
       // yeh wala section new hai, taking email from user and saving it to Email model
       // console.log(profile.emails[0].value);
       let data = await Email.findOne({ googleId: profile.id });
+      await redis_client.incr("count", (err, result) => {
+        if (err) {
+          throw new Error(err);
+        }
+      });
       if (data === null) {
         let newData = new Email({
           googleId: profile.id,
@@ -122,15 +126,26 @@ app.get(
 );
 
 // google auth routes BTP-SEM-5 //
-app.get("/", (req, res) => {
-  let _ = false;
-  let name = "";
-  if (req.user !== undefined) {
-    _ = true;
-    name = req.user.username;
+app.get("/", async (req, res) => {
+  try {
+    let _ = false;
+    let name = "";
+    if (req.user !== undefined) {
+      _ = true;
+      name = req.user.username;
+    }
+    let count = await redis_client.get("count");
+    res.render("home", { _, name, count });
+    // if (req.user === undefined) {
+    //   await redis_client.incr("count", (err, result) => {
+    //     if (err) {
+    //       throw new Error(err);
+    //     }
+    //   });
+    // }
+  } catch (err) {
+    res.status(400).render("error_404");
   }
-
-  res.render("home", { _, name });
 });
 
 app.get("/logout", logoutNext, (req, res) => {
