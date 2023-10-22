@@ -136,13 +136,6 @@ app.get("/", async (req, res) => {
     }
     let count = await redis_client.get("count");
     res.render("home", { _, name, count });
-    // if (req.user === undefined) {
-    //   await redis_client.incr("count", (err, result) => {
-    //     if (err) {
-    //       throw new Error(err);
-    //     }
-    //   });
-    // }
   } catch (err) {
     res.status(400).render("error_404");
   }

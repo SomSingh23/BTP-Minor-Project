@@ -156,3 +156,17 @@ header p {
 .logout_div h1 a:hover {
   background-color: #d32f2f;
 }
+.count_user {
+  margin-top: 5px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+  @media (max-width: 800px) {
+    width: 80%;
+    margin-top: 8px;
+    padding: 5px;
+  }
+}
