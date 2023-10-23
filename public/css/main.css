@@ -161,7 +161,7 @@ header p {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #f4f4f4;
+  background-color: #fff5f5;
   padding: 10px;
   border-radius: 10px;
   @media (max-width: 800px) {
