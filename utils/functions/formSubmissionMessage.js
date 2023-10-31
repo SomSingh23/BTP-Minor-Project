@@ -89,7 +89,7 @@ let formSubmitMessage = (username) => {
                     <li><div class="verification">Verification 3:</div> By Assigned Faculty</li>
                 </ol>
                 <p>Please be patient as the verification process may take up to 1-2 business days. You will receive email notifications after each step is completed. A final confirmation email will be sent once all verifications are successful.</p>
-                <p>If you have any questions or need assistance, please contact our support team at <a href="mailto:112115145@cse.iiitp.ac.in">112115145@cse.iiitp.ac.in</a>.</p>
+                <p>If you have any questions or need assistance, please contact our support team at <a href="mailto:8fd9k.test@inbox.testmail.app">8fd9k.test@inbox.testmail.app</a>.</p>
                 <p>Thank you for choosing us!</p>
             </div>
             <div class="footer">
