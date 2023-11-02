@@ -158,14 +158,14 @@ header p {
 }
 .count_user {
   margin-top: 5px;
-  width: 50%;
+  width: 10%;
   margin-left: auto;
   margin-right: auto;
   background-color: #fff5f5;
   padding: 10px;
   border-radius: 10px;
   @media (max-width: 800px) {
-    width: 80%;
+    width: 40%;
     margin-top: 8px;
     padding: 5px;
   }

@@ -78,11 +78,6 @@ passport.use(
       // yeh wala section new hai, taking email from user and saving it to Email model
       // console.log(profile.emails[0].value);
       let data = await Email.findOne({ googleId: profile.id });
-      await redis_client.incr("count", (err, result) => {
-        if (err) {
-          throw new Error(err);
-        }
-      });
       if (data === null) {
         let newData = new Email({
           googleId: profile.id,
@@ -134,9 +129,12 @@ app.get("/", async (req, res) => {
       _ = true;
       name = req.user.username;
     }
-    let count = await redis_client.get("count");
+    // counting current number of sessions :____)
+    let keys = await redis_client.keys("sess:*");
+    let count = keys.length;
     res.render("home", { _, name, count });
   } catch (err) {
+    console.log(err);
     res.status(400).render("error_404");
   }
 });
