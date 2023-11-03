@@ -19,6 +19,7 @@ let moveNext = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
+    req.session.kahaPer = req.originalUrl;
     res.redirect("/auth/google");
   }
 };
@@ -113,10 +114,15 @@ app.get(
 );
 app.get(
   "/google/api/auth",
+  (req, res, next) => {
+    let redirectTo = req.session.kahaPer || "/";
+    res.locals.redirectTo = redirectTo;
+    next();
+  },
   passport.authenticate("google", { failureRedirect: "/" }),
   function (req, res) {
     // Successful authentication, Now redirect .
-    res.redirect("/");
+    res.redirect(res.locals.redirectTo);
   }
 );
 
