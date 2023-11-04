@@ -18,7 +18,10 @@ let redis_client = require("./utils/redis/clientConfigure");
 let RedisStore = require("connect-redis").default;
 let moveNext = require("./utils/middleware/moveNext");
 let logoutNext = require("./utils/middleware/logoutNext");
-
+let checkAdmin = require("./utils/functions/checkAdmin");
+let moveAdmin1 = require("./utils/middleware/moveAdmin1");
+let moveAdmin2 = require("./utils/middleware/moveAdmin2");
+let moveAdmin3 = require("./utils/middleware/moveAdmin3");
 mongoose
   .connect(process.env.CONNECT_MONGODB)
   .then(() => {
@@ -118,7 +121,7 @@ app.get(
 // google auth routes BTP-SEM-5 //
 app.get("/", async (req, res) => {
   try {
-    console.log(req.user);
+    console.log(checkAdmin(req));
     let _ = false;
     let name = "";
     if (req.user !== undefined) {
@@ -218,7 +221,7 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 // admin routes
-app.get("/v1", moveNext, async (req, res) => {
+app.get("/v1", moveNext, moveAdmin1, async (req, res) => {
   /*
   This is currently just a prototype,
   so anyone can access this route and
@@ -227,6 +230,12 @@ app.get("/v1", moveNext, async (req, res) => {
   console.log("v1");
   let data = await Student.find({});
   res.render("v1", { data });
+});
+app.get("/v2", moveNext, moveAdmin2, async (req, res) => {
+  res.render("v2");
+});
+app.get("/v3", moveNext, moveAdmin3, async (req, res) => {
+  res.render("v3");
 });
 app.get("/v1/:id", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
