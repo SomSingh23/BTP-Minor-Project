@@ -22,6 +22,7 @@ let checkAdmin = require("./utils/functions/checkAdmin");
 let moveAdmin1 = require("./utils/middleware/moveAdmin1");
 let moveAdmin2 = require("./utils/middleware/moveAdmin2");
 let moveAdmin3 = require("./utils/middleware/moveAdmin3");
+let moveAdmin = require("./utils/middleware/moveAdmin");
 mongoose
   .connect(process.env.CONNECT_MONGODB)
   .then(() => {
@@ -221,23 +222,19 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 // admin routes
-app.get("/v1", moveNext, moveAdmin1, async (req, res) => {
-  /*
-  This is currently just a prototype,
-  so anyone can access this route and
-  verify the v1 process of students.
-  However, this will change in the future. 🧑‍💻🧑‍💻🤗*/
-  console.log("v1");
+app.get("/v1", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
   res.render("v1", { data });
 });
-app.get("/v2", moveNext, moveAdmin2, async (req, res) => {
-  res.render("v2");
+app.get("/v2", moveAdmin, moveAdmin2, async (req, res) => {
+  let data = await Student.find({});
+  res.render("v2", { data });
 });
-app.get("/v3", moveNext, moveAdmin3, async (req, res) => {
-  res.render("v3");
+app.get("/v3", moveAdmin, moveAdmin3, async (req, res) => {
+  let data = await Student.find({});
+  res.render("v3", { data });
 });
-app.get("/v1/:id", moveNext, async (req, res) => {
+app.get("/v1/:id", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
   if (data == null) {
     return res.redirect("/v1");
@@ -252,7 +249,7 @@ app.get("/v1/:id", moveNext, async (req, res) => {
   });
 });
 
-app.post("/v1/:id", moveNext, async (req, res) => {
+app.post("/v1/:id", moveAdmin, moveAdmin1, async (req, res) => {
   let _check = await Student.findOne({ googleId: req.params.id });
   if (_check === null) {
     console.log("someone doing bad stuff");
@@ -275,7 +272,7 @@ app.post("/v1/:id", moveNext, async (req, res) => {
   }
   return res.redirect("/v1");
 });
-app.get("/v1/:id/fail", moveNext, async (req, res) => {
+app.get("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
   if (data === null) {
     return res.redirect("/v1");
@@ -284,7 +281,7 @@ app.get("/v1/:id/fail", moveNext, async (req, res) => {
   console.log(username);
   res.render("v1_fail", { username, googleId: req.params.id });
 });
-app.post("/v1/:id/fail", moveNext, async (req, res) => {
+app.post("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   await Student.updateOne(
     {
       googleId: req.params.id,
@@ -298,10 +295,6 @@ app.post("/v1/:id/fail", moveNext, async (req, res) => {
   res.redirect("/v1");
 });
 
-// invalid route ke liye //
-app.get("*", (req, res) => {
-  res.status(404).render("error_404");
-});
 app.post(
   "/login",
   (req, res, next) => {
@@ -316,3 +309,7 @@ app.post(
     return res.redirect(res.locals.userWant);
   }
 );
+// invalid route ke liye //
+app.get("*", (req, res) => {
+  res.status(404).render("error_404");
+});

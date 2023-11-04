@@ -7,5 +7,8 @@
   </head>
   <body>
     <h1>V2 ADMIN DASHBOARD</h1>
+    <%for(let i of data){%> <%if(i.verification1===true){%>
+    <li><%=i.username%></li>
+    <%}%> <%}%>
   </body>
 </html>
