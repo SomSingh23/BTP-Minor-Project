@@ -9,27 +9,16 @@ let session = require("express-session");
 // const MongoStore = require("connect-mongo"); no longer needed to store session :)
 var findOrCreate = require("mongoose-findorcreate");
 let passport = require("passport");
+let strategy = require("passport-local");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 let Student = require("./models/student");
 let sendEmail = require("./utils/email/semail");
 let formSubmitMessage = require("./utils/functions/formSubmissionMessage");
 let redis_client = require("./utils/redis/clientConfigure");
 let RedisStore = require("connect-redis").default;
-let moveNext = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    req.session.kahaPer = req.originalUrl;
-    res.redirect("/auth/google");
-  }
-};
-let logoutNext = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.redirect("/");
-  }
-};
+let moveNext = require("./utils/middleware/moveNext");
+let logoutNext = require("./utils/middleware/logoutNext");
+
 mongoose
   .connect(process.env.CONNECT_MONGODB)
   .then(() => {
@@ -59,7 +48,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+passport.use(new strategy(User.authenticate()));
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
@@ -129,6 +118,7 @@ app.get(
 // google auth routes BTP-SEM-5 //
 app.get("/", async (req, res) => {
   try {
+    console.log(req.user);
     let _ = false;
     let name = "";
     if (req.user !== undefined) {
@@ -224,13 +214,17 @@ app.post("/dashboard/fail", moveNext, async (req, res) => {
   return res.redirect("/dashboard");
 });
 // highly___protected/admin routes starts from here  //
-
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+// admin routes
 app.get("/v1", moveNext, async (req, res) => {
   /*
   This is currently just a prototype,
   so anyone can access this route and
   verify the v1 process of students.
   However, this will change in the future. 🧑‍💻🧑‍💻🤗*/
+  console.log("v1");
   let data = await Student.find({});
   res.render("v1", { data });
 });
@@ -299,21 +293,17 @@ app.post("/v1/:id/fail", moveNext, async (req, res) => {
 app.get("*", (req, res) => {
   res.status(404).render("error_404");
 });
-// invalid route ke liye //
-// app.post("/v1", moveNext, async (req, res) => {
-//   console.log("/v1 post route");
-
-//   return res.redirect("/v1");
-// });
-
-// yeh remove karna hai production ke phale //
-// app.get("/test", async (req, res) => {
-//   try {
-//     let createStudent = new Student({ googleId: req.user.googleId });
-//     await createStudent.save();
-//     res.send("Successfully");
-//   } catch (err) {
-//     res.send(err);
-//   }
-// });
-// yeh remove karna hai production ke phale //
+app.post(
+  "/login",
+  (req, res, next) => {
+    res.locals.userWant = req.session.kahaPer || "/";
+    next();
+  },
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+  }),
+  (req, res) => {
+    console.log("login successful");
+    return res.redirect(res.locals.userWant);
+  }
+);
