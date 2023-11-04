@@ -356,6 +356,70 @@ app.post("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
   res.redirect("/v2");
 });
 // v2 ends
+
+// v3 routes starts
+app.get("/v3/:id", moveAdmin, moveAdmin3, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data == null) {
+    return res.redirect("/v3");
+  }
+  res.render("v3_student", {
+    username: data.username,
+    googleId: data.googleId,
+    misNo: data.misNo,
+    semester: data.semester,
+    currentYear: data.currentYear,
+    messFee: data.messFee,
+  });
+});
+
+app.post("/v3/:id", moveAdmin, moveAdmin3, async (req, res) => {
+  let _check = await Student.findOne({ googleId: req.params.id });
+  if (_check === null) {
+    console.log("someone doing bad stuff");
+    return res.redirect("/v3");
+  }
+  if (req.body.verification === "yes") {
+    // send mail to student that he/she is verified :)
+    console.log("success v3");
+    await Student.updateOne(
+      {
+        googleId: req.params.id,
+      },
+      {
+        $set: {
+          verification3: true,
+        },
+      }
+    );
+  } else {
+    return res.redirect(`/v3/${req.params.id}/fail`);
+  }
+  return res.redirect("/v3");
+});
+app.get("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data === null) {
+    return res.redirect("/v3");
+  }
+  let username = data.username;
+  console.log(username);
+  res.render("v3_fail", { username, googleId: req.params.id });
+});
+app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
+  await Student.updateOne(
+    {
+      googleId: req.params.id,
+    },
+    {
+      $set: {
+        verification3Status: req.body.reason,
+      },
+    }
+  );
+  res.redirect("/v3");
+});
+// v3 routes end here
 app.post(
   "/login",
   (req, res, next) => {

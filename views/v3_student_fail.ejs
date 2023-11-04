@@ -21,17 +21,24 @@
       href="/icon/android-chrome-192x192.png"
     />
     <link rel="manifest" href="/icon/site.webmanifest" />
-    <link rel="stylesheet" href="/css/v1.css" />
-    <title>v3</title>
+    <link rel="stylesheet" href="/css/v1_student_fail.css" />
+    <title>Verification Status</title>
   </head>
   <body>
-    <h1>Pending Student V3 verification list 👇</h1>
-    <ol>
-      <% for( let x of data ) { %> <%if(!x.verification3 &&
-      x.verification3Status===process.env.STATUS && x.verification1===true &&
-      x.verification2===true) { %>
-      <li><a href="/v3/<%=x.googleId%>"><%=x.username%></a></li>
-      <%}%> <% } %>
-    </ol>
+    <div class="fail">
+      <h1>Verification 3 has failed</h1>
+    </div>
+    <div class="reason">
+      <h2>Reason</h2>
+      <h2><em><%= v3_status %></em></h2>
+    </div>
+    <div class="restart">
+      <h3>Do you want to fill the form again and restart the process?</h3>
+    </div>
+
+    <form action="/dashboard/fail" method="post">
+      <button name="ans" value="yes">Yes</button>
+      <button name="ans" value="no">No</button>
+    </form>
   </body>
 </html>

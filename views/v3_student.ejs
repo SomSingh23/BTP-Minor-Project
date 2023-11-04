@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= username %> Details/V3</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/icon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/icon/android-chrome-512x512.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/icon/android-chrome-192x192.png"
+    />
+    <link rel="manifest" href="/icon/site.webmanifest" />
+    <link rel="stylesheet" href="/css/v1_student.css" />
+  </head>
+  <body>
+    <h1><%= username %> Details 👇</h1>
+    <div class="user-info">
+      <h2>Mis No: <em><%= misNo %></em></h2>
+      <h2>Semester: <em><%= semester %></em></h2>
+      <h2>Current Year: <em><%= currentYear %></em></h2>
+      <h2>Mess Fee Ref No: <em><%= messFee %></em></h2>
+    </div>
+    <form method="POST" action="/v3/<%= googleId %>">
+      <label for="verification">Do you want to verify <%= username %>?</label>
+      <select id="verification" name="verification">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
