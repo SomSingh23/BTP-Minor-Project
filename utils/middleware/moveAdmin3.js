@@ -4,7 +4,8 @@ let moveAdmin3 = (req, res, next) => {
   if (adminNo === 3) {
     next();
   } else {
-    res.redirect("/");
+    req.session.kahaPer = req.originalUrl;
+    res.redirect("/login");
   }
 };
 module.exports = moveAdmin3;

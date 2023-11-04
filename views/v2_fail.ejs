@@ -21,16 +21,23 @@
       href="/icon/android-chrome-192x192.png"
     />
     <link rel="manifest" href="/icon/site.webmanifest" />
-    <link rel="stylesheet" href="/css/v1.css" />
-    <title>v2</title>
+    <link rel="stylesheet" href="/css/v1_fail.css" />
+    <title>Reason for Not Verifying V2 Verification</title>
   </head>
   <body>
-    <h1>Pending Student V2 verification list 👇</h1>
-    <ol>
-      <% for( let x of data ) { %> <%if(!x.verification2 &&
-      x.verification2Status===process.env.STATUS && x.verification1===true) { %>
-      <li><a href="/v2/<%=x.googleId%>"><%=x.username%></a></li>
-      <%}%> <% } %>
-    </ol>
+    <div class="reason"><h1>Reason for Not Verifying <%= username %></h1></div>
+
+    <form action="/v2/<%=googleId%>/fail" method="POST">
+      <label for="reason">Reason</label>
+      <textarea
+        id="reason"
+        name="reason"
+        rows="4"
+        cols="50"
+        required
+      ></textarea>
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
   </body>
 </html>
