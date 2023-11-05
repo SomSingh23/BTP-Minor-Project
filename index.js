@@ -6,8 +6,6 @@ let path = require("path");
 let User = require("./models/user");
 let Email = require("./models/email");
 let session = require("express-session");
-// const MongoStore = require("connect-mongo"); no longer needed to store session :)
-var findOrCreate = require("mongoose-findorcreate");
 let passport = require("passport");
 let strategy = require("passport-local");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
@@ -23,6 +21,7 @@ let moveAdmin1 = require("./utils/middleware/moveAdmin1");
 let moveAdmin2 = require("./utils/middleware/moveAdmin2");
 let moveAdmin3 = require("./utils/middleware/moveAdmin3");
 let moveAdmin = require("./utils/middleware/moveAdmin");
+// const MongoStore = require("connect-mongo"); no longer needed to store session :) might use in future
 mongoose
   .connect(process.env.CONNECT_MONGODB)
   .then(() => {
@@ -48,6 +47,7 @@ app.use(
     }) */
   })
 );
+
 // -------------------------Auth----------------------------------- //
 
 app.use(passport.initialize());
@@ -69,8 +69,6 @@ passport.use(
       callbackURL: process.env.CALLBACK_URL,
     },
     async function (accessToken, refreshToken, profile, cb) {
-      // yeh wala section new hai, taking email from user and saving it to Email model
-      // console.log(profile.emails[0].value);
       let data = await Email.findOne({ googleId: profile.id });
       if (data === null) {
         let newData = new Email({
@@ -79,7 +77,6 @@ passport.use(
         });
         await newData.save();
       }
-      // yeh wala section new hai, taking email from user and saving it to Email model
       User.findOrCreate(
         {
           googleId: profile.id,
@@ -94,9 +91,11 @@ passport.use(
 );
 
 // ---------------------------Auth---------------------------------- //
+
 app.listen(process.env.PORT, () => {
   console.log("Listening on port 3000");
 });
+
 // google auth routes BTP-SEM-5 //
 
 app.get(
@@ -120,6 +119,7 @@ app.get(
 );
 
 // google auth routes BTP-SEM-5 //
+
 app.get("/", async (req, res) => {
   try {
     console.log(checkAdmin(req));
@@ -167,8 +167,16 @@ app.get("/dashboard", moveNext, async (req, res) => {
   let v2 = data.verification2;
   let v3 = data.verification3;
   let v1_status = data.verification1Status;
+  let v2_status = data.verification2Status;
+  let v3_status = data.verification3Status;
   if (v1_status !== process.env.STATUS) {
     return res.render("v1_student_fail", { v1_status });
+  }
+  if (v2_status !== process.env.STATUS) {
+    return res.render("v2_student_fail", { v2_status });
+  }
+  if (v3_status !== process.env.STATUS) {
+    return res.render("v3_student_fail", { v3_status });
   }
   res.render("verification", { v1, v2, v3 });
 });

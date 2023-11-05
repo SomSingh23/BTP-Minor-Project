@@ -162,11 +162,43 @@ header p {
   margin-left: auto;
   margin-right: auto;
   background-color: #fff5f5;
-  padding: 10px;
+  padding: 4px;
   border-radius: 10px;
   @media (max-width: 800px) {
     width: 40%;
     margin-top: 8px;
-    padding: 5px;
+    padding: 4px;
   }
+}
+/* sexy aana */
+/* Footer Styles */
+.site-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Copyright Text */
+.site-footer .copyright {
+  font-size: 14px;
+}
+
+/* About Section */
+.site-footer .about {
+  font-size: 16px;
+}
+
+/* Link Styles (customize as needed) */
+.site-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
 }
