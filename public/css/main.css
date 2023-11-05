@@ -183,6 +183,17 @@ header p {
   margin: 0;
 }
 #carouselExampleSlidesOnly {
-  margin-top: 140px;
+  margin-top: 50px;
   margin-bottom: 140px;
+}
+.registration-header {
+  font-family: Arial, sans-serif;
+  color: #336699;
+  text-align: center;
+  font-size: 31px;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  font-family: "Maven Pro", sans-serif;
 }
