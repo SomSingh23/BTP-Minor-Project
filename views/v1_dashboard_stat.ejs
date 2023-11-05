@@ -1,0 +1,94 @@
+<!-- studentStats.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Statistics</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .chart-container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .legend {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: 50px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .legend-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart-container">
+      <svg class="chart"></svg>
+      <div class="legend">
+        <% studentStats.forEach((item, index) => { %>
+        <div class="legend-item">
+          <div
+            class="legend-color"
+            style="background-color: <%= somcolor[index] %>"
+          ></div>
+          <div><%= studentStats[index].label %></div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <script>
+      const data = <%- JSON.stringify(studentStats) %>;
+
+      const width = 500;
+      const height = 500;
+      const radius = Math.min(width, height) / 2;
+
+      const svg = d3.select(".chart")
+          .attr("width", width)
+          .attr("height", height)
+          .append("g")
+          .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      const color = d3.scaleOrdinal(["#1f77b4", "#2ca02c", "#d62728", "#ff7f0e"]);
+
+      const pie = d3.pie()
+          .value(d => d.value);
+
+      const path = d3.arc()
+          .outerRadius(radius - 10)
+          .innerRadius(radius - 80);
+
+      const arc = svg.selectAll(".arc")
+          .data(pie(data))
+          .enter()
+          .append("g")
+          .attr("class", "arc");
+
+      arc.append("path")
+          .attr("d", path)
+          .attr("fill", d => color(d.data.label));
+
+      arc.append("text")
+          .attr("transform", d => `translate(${path.centroid(d)})`)
+          .attr("dy", ".35em")
+          .text(d => d.data.label);
+    </script>
+  </body>
+</html>

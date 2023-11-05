@@ -202,6 +202,12 @@ app.get("/student/status", moveNext, async (req, res) => {
   }
   res.render("verification", { v1, v2, v3 });
 });
+app.get("/student/profile", moveNext, async (req, res) => {
+  res.send("working on profile section");
+});
+app.get("/student/how_to_register", moveNext, async (req, res) => {
+  res.send("working on this how to register");
+});
 app.post("/dashboard", moveNext, async (req, res) => {
   try {
     let __d = await Student.findOne({ googleId: req.user.googleId });
@@ -250,9 +256,30 @@ app.post("/dashboard/fail", moveNext, async (req, res) => {
 });
 // highly___protected/admin routes starts from here  //
 app.get("/login", (req, res) => {
+  // this needs alot of improvement
   res.render("login");
 });
 // admin routes
+app.get("/v1_dashboard", moveAdmin, moveAdmin1, async (req, res) => {
+  res.render("v1_dashboard");
+});
+app.get("/v1_dashboard/verified", moveAdmin, moveAdmin1, async (req, res) => {
+  res.send("working on this route v1 dashboard verified");
+});
+app.get("/v1_dashboard/rejected", moveAdmin, moveAdmin1, async (req, res) => {
+  res.send("working on this route v1 dashboard rejected");
+});
+app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
+  const studentStats = [
+    { label: "Registered", value: 100 },
+    { label: "Verified", value: 50 },
+    { label: "Rejected", value: 10 },
+    { label: "Pending", value: 47 },
+  ];
+  let somcolor = ["#1f77b4", "#2ca02c", "#d62728", "#ff7f0e"];
+
+  res.render("v1_dashboard_stat", { studentStats, somcolor });
+});
 app.get("/v1", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
   res.render("v1", { data });
