@@ -1,17 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="navbar">
-      <div class="home">Home</div>
-      <div class="student">Student</div>
-      <div class="v1">V1 Admin</div>
-      <div class="v1">V2 Admin</div>
-      <div class="v1">V3 Admin</div>
-    </div>
-  </body>
-</html>
+<%if(category===-1){%>
+
+<div class="navbar">
+  <div class="logo">
+    <img src="/img/lo.jpg" alt="logo" />
+  </div>
+  <div class="nav-items">
+    <a href="/"
+      ><div class="home">
+        <p>Home</p>
+      </div></a
+    >
+    <a href="/auth/google"
+      ><div class="student">
+        <p>Student</p>
+      </div></a
+    >
+
+    <a href="/v1">
+      <div class="admin">
+        <p>V1 Admin</p>
+      </div></a
+    >
+    <a href="/v2"
+      ><div class="admin">
+        <p>V2 Admin</p>
+      </div></a
+    >
+    <a href="/v3">
+      <div class="admin">
+        <p>V3 Admin</p>
+      </div></a
+    >
+  </div>
+</div>
+<%} else if(category===0){%>
+<div class="navbar">
+  <div class="logo">
+    <img src="/img/lo.jpg" alt="logo" />
+  </div>
+  <div class="nav-items">
+    <a href="/"
+      ><div class="home">
+        <p>Home</p>
+      </div></a
+    >
+
+    <a href="/dashboard">
+      <div class="admin">
+        <p>Dashboard</p>
+      </div></a
+    >
+
+    <a href="/logout"
+      ><div class="student">
+        <p>Logout</p>
+      </div></a
+    >
+  </div>
+</div>
+<%}else if(category===1){%>
+<div class="navbar">
+  <div class="logo">
+    <img src="/img/lo.jpg" alt="logo" />
+  </div>
+  <div class="nav-items">
+    <a href="/"
+      ><div class="home">
+        <p>Home</p>
+      </div></a
+    >
+    <a href="/pending">
+      <div class="admin">
+        <p>V1 Pending</p>
+      </div></a
+    >
+    <a href="/dashboard">
+      <div class="admin">
+        <p>Dashboard</p>
+      </div></a
+    >
+
+    <a href="/logout"
+      ><div class="student">
+        <p>Logout</p>
+      </div></a
+    >
+  </div>
+</div>
+<%}else if(category===2){%>
+<div class="navbar">
+  <div class="logo">
+    <img src="/img/lo.jpg" alt="logo" />
+  </div>
+  <div class="nav-items">
+    <a href="/"
+      ><div class="home">
+        <p>Home</p>
+      </div></a
+    >
+    <a href="/pending">
+      <div class="admin">
+        <p>V2 Pending</p>
+      </div></a
+    >
+    <a href="/dashboard">
+      <div class="admin">
+        <p>Dashboard</p>
+      </div></a
+    >
+
+    <a href="/logout"
+      ><div class="student">
+        <p>Logout</p>
+      </div></a
+    >
+  </div>
+</div>
+<%}else if(category===3){%>
+<div class="navbar">
+  <div class="logo">
+    <img src="/img/lo.jpg" alt="logo" />
+  </div>
+  <div class="nav-items">
+    <a href="/"
+      ><div class="home">
+        <p>Home</p>
+      </div></a
+    >
+    <a href="/pending">
+      <div class="admin">
+        <p>V3 Pending</p>
+      </div></a
+    >
+    <a href="/dashboard">
+      <div class="admin">
+        <p>Dashboard</p>
+      </div></a
+    >
+
+    <a href="/logout"
+      ><div class="student">
+        <p>Logout</p>
+      </div></a
+    >
+  </div>
+</div>
+<%}%>

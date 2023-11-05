@@ -122,7 +122,7 @@ app.get(
 
 app.get("/", async (req, res) => {
   try {
-    console.log(checkAdmin(req));
+    let category = checkAdmin(req);
     let _ = false;
     let name = "";
     if (req.user !== undefined) {
@@ -132,7 +132,7 @@ app.get("/", async (req, res) => {
     // counting current number of sessions :____)
     let keys = await redis_client.keys("sess:*");
     let count = keys.length;
-    res.render("home", { _, name, count });
+    res.render("home", { category, _, name, count });
   } catch (err) {
     console.log(err);
     res.status(400).render("error_404");

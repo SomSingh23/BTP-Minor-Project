@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/icon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/icon/android-chrome-512x512.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/icon/android-chrome-192x192.png"
-    />
-    <link rel="manifest" href="/icon/site.webmanifest" />
-    <link rel="stylesheet" href="/css/main.css" />
+<%-include('partials/header')%>
     <title>Home</title>
   </head>
   <body>
+    <%-include('partials/navbar')%>
     <header>
       <h1>Welcome to the IIIT Pune Registration System</h1>
       <p>Your one-stop solution for hassle-free registration</p>
@@ -76,5 +54,6 @@
       </div>
     </section>
     <%}%>
+    <%-include('partials/footer')%>
   </body>
 </html>
