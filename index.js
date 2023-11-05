@@ -21,6 +21,7 @@ let moveAdmin1 = require("./utils/middleware/moveAdmin1");
 let moveAdmin2 = require("./utils/middleware/moveAdmin2");
 let moveAdmin3 = require("./utils/middleware/moveAdmin3");
 let moveAdmin = require("./utils/middleware/moveAdmin");
+let Profile = require("./models/profile");
 // const MongoStore = require("connect-mongo"); no longer needed to store session :) might use in future
 mongoose
   .connect(process.env.CONNECT_MONGODB)
@@ -69,11 +70,23 @@ passport.use(
       callbackURL: process.env.CALLBACK_URL,
     },
     async function (accessToken, refreshToken, profile, cb) {
+      // console.log(profile);
       let data = await Email.findOne({ googleId: profile.id });
       if (data === null) {
         let newData = new Email({
           googleId: profile.id,
           email: profile.emails[0].value,
+        });
+        await newData.save();
+      }
+      data = await Profile.findOne({ googleId: profile.id });
+      if (data === null) {
+        let newData = new Profile({
+          googleId: profile.id,
+          email: profile.emails[0].value,
+          picture: profile.photos[0].value,
+          email_verified: profile._json.email_verified,
+          name: profile.displayName,
         });
         await newData.save();
       }
@@ -162,7 +175,7 @@ app.post("/logout", logoutNext, (req, res) => {
   });
 });
 app.get("/dashboard", moveNext, async (req, res) => {
-  res.render("student_dashboard");
+  res.render("student_dashboard", { category: 0 });
 });
 app.get("/student/register", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
@@ -192,21 +205,28 @@ app.get("/student/status", moveNext, async (req, res) => {
   let v2_status = data.verification2Status;
   let v3_status = data.verification3Status;
   if (v1_status !== process.env.STATUS) {
-    return res.render("v1_student_fail", { v1_status });
+    return res.render("v1_student_fail", { v1_status, category: 0 });
   }
   if (v2_status !== process.env.STATUS) {
-    return res.render("v2_student_fail", { v2_status });
+    return res.render("v2_student_fail", { v2_status, category: 0 });
   }
   if (v3_status !== process.env.STATUS) {
-    return res.render("v3_student_fail", { v3_status });
+    return res.render("v3_student_fail", { v3_status, category: 0 });
   }
-  res.render("verification", { v1, v2, v3 });
+  res.render("verification", { v1, v2, v3, category: 0 });
 });
 app.get("/student/profile", moveNext, async (req, res) => {
+  try {
+    let data = await Profile.findOne({ googleId: req.user.googleId });
+    console.log(data);
+    return res.render("student_profile", { data, category: 0 });
+  } catch (err) {
+    res.status(400).render("error_404");
+  }
   res.send("working on profile section");
 });
 app.get("/student/how_to_register", moveNext, async (req, res) => {
-  res.send("working on this how to register");
+  res.render("student_how_to_register", { category: 0 });
 });
 app.post("/dashboard", moveNext, async (req, res) => {
   try {
@@ -257,11 +277,12 @@ app.post("/dashboard/fail", moveNext, async (req, res) => {
 // highly___protected/admin routes starts from here  //
 app.get("/login", (req, res) => {
   // this needs alot of improvement
-  res.render("login");
+  let category = checkAdmin(req);
+  res.render("login", { category });
 });
 // admin routes
 app.get("/v1_dashboard", moveAdmin, moveAdmin1, async (req, res) => {
-  res.render("v1_dashboard");
+  res.render("v1_dashboard", { category: 1 });
 });
 app.get("/v1_dashboard/verified", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
@@ -278,7 +299,7 @@ app.get("/v1_dashboard/verified", moveAdmin, moveAdmin1, async (req, res) => {
   let rejected = data.length;
   let pending = registered - verified - rejected;
 
-  res.render("v1_dashboard_verified", { pending, verified });
+  res.render("v1_dashboard_verified", { pending, verified, category: 1 });
 });
 app.get("/v1_dashboard/rejected", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({
@@ -292,7 +313,7 @@ app.get("/v1_dashboard/rejected", moveAdmin, moveAdmin1, async (req, res) => {
   });
   let rejected = data.length;
 
-  res.render("v1_dashboard_rejected", { verified, rejected });
+  res.render("v1_dashboard_rejected", { verified, rejected, category: 1 });
 });
 app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
@@ -326,19 +347,20 @@ app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
     verified,
     rejected,
     pending,
+    category: 1,
   });
 });
 app.get("/v1", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
-  res.render("v1", { data });
+  res.render("v1", { data, category: 1 });
 });
 app.get("/v2", moveAdmin, moveAdmin2, async (req, res) => {
   let data = await Student.find({});
-  res.render("v2", { data });
+  res.render("v2", { data, category: 2 });
 });
 app.get("/v3", moveAdmin, moveAdmin3, async (req, res) => {
   let data = await Student.find({});
-  res.render("v3", { data });
+  res.render("v3", { data, category: 3 });
 });
 app.get("/v1/:id", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
@@ -352,6 +374,7 @@ app.get("/v1/:id", moveAdmin, moveAdmin1, async (req, res) => {
     semester: data.semester,
     currentYear: data.currentYear,
     messFee: data.messFee,
+    category: 1,
   });
 });
 
@@ -385,7 +408,7 @@ app.get("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   }
   let username = data.username;
   console.log(username);
-  res.render("v1_fail", { username, googleId: req.params.id });
+  res.render("v1_fail", { username, googleId: req.params.id, category: 1 });
 });
 app.post("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   await Student.updateOne(
@@ -401,6 +424,9 @@ app.post("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   res.redirect("/v1");
 });
 // v2
+app.get("/v2_dashboard", moveAdmin, moveAdmin2, async (req, res) => {
+  res.render("v2_dashboard", { category: 2 });
+});
 app.get("/v2/:id", moveAdmin, moveAdmin2, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
   if (data == null) {
@@ -413,6 +439,7 @@ app.get("/v2/:id", moveAdmin, moveAdmin2, async (req, res) => {
     semester: data.semester,
     currentYear: data.currentYear,
     messFee: data.messFee,
+    category: 2,
   });
 });
 
@@ -446,7 +473,7 @@ app.get("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
   }
   let username = data.username;
   console.log(username);
-  res.render("v2_fail", { username, googleId: req.params.id });
+  res.render("v2_fail", { username, googleId: req.params.id, category: 2 });
 });
 app.post("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
   await Student.updateOne(
@@ -464,6 +491,9 @@ app.post("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
 // v2 ends
 
 // v3 routes starts
+app.get("/v3_dashboard", moveAdmin, moveAdmin3, async (req, res) => {
+  res.render("v3_dashboard", { category: 3 });
+});
 app.get("/v3/:id", moveAdmin, moveAdmin3, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
   if (data == null) {
@@ -476,6 +506,7 @@ app.get("/v3/:id", moveAdmin, moveAdmin3, async (req, res) => {
     semester: data.semester,
     currentYear: data.currentYear,
     messFee: data.messFee,
+    category: 3,
   });
 });
 
@@ -510,7 +541,7 @@ app.get("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
   }
   let username = data.username;
   console.log(username);
-  res.render("v3_fail", { username, googleId: req.params.id });
+  res.render("v3_fail", { username, googleId: req.params.id, category: 3 });
 });
 app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
   await Student.updateOne(

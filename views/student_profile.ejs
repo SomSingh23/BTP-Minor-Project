@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+    <style>
+      h1 {
+        margin-top: 50px;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+      .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .username {
+        font-size: 24px;
+        margin: 10px 0;
+      }
+      .email {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      .email-verified {
+        font-size: 16px;
+        color: green;
+      }
+      .email-unverified {
+        font-size: 16px;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <div class="profile-container">
+      <img
+        class="profile-pic"
+        src="<%= data.picture %>"
+        alt="Profile Picture"
+      />
+      <div class="username"><%=data.name %></div>
+      <div class="email"><%= data.email %></div>
+      <% if (data.email_verified) { %>
+      <div class="email-verified">Email Verified</div>
+      <% } else { %>
+      <div class="email-unverified">Email Not Verified</div>
+      <% } %>
+    </div>
+  </body>
+</html>
