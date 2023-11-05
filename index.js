@@ -281,7 +281,18 @@ app.get("/v1_dashboard/verified", moveAdmin, moveAdmin1, async (req, res) => {
   res.render("v1_dashboard_verified", { pending, verified });
 });
 app.get("/v1_dashboard/rejected", moveAdmin, moveAdmin1, async (req, res) => {
-  res.send("working on this route v1 dashboard rejected");
+  let data = await Student.find({
+    verification1: true,
+    verification1Status: process.env.STATUS,
+  });
+  let verified = data.length;
+  data = await Student.find({
+    verification1: false,
+    verification1Status: { $ne: process.env.STATUS },
+  });
+  let rejected = data.length;
+
+  res.render("v1_dashboard_rejected", { verified, rejected });
 });
 app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
