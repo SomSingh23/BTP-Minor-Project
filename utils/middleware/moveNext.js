@@ -1,5 +1,7 @@
+let checkAdmin = require("../functions/checkAdmin");
 let moveNext = (req, res, next) => {
-  if (req.isAuthenticated()) {
+  let adminNo = checkAdmin(req);
+  if (adminNo === 0) {
     next();
   } else {
     req.session.kahaPer = req.originalUrl;

@@ -162,6 +162,9 @@ app.post("/logout", logoutNext, (req, res) => {
   });
 });
 app.get("/dashboard", moveNext, async (req, res) => {
+  res.render("student_dashboard");
+});
+app.get("/student/register", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
   let userFirstTime = true;
   let data2 = await Email.findOne({ googleId: req.user.googleId });
@@ -172,6 +175,16 @@ app.get("/dashboard", moveNext, async (req, res) => {
     return res.render("dashboard", { userFirstTime, username, userEmail });
   }
 
+  res.send(
+    "Already filled the form!!! kindly wait for the verification till then you can check the status"
+  );
+});
+
+app.get("/student/status", moveNext, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.user.googleId });
+  if (data === null) {
+    return res.send("kindly fill the form first");
+  }
   let v1 = data.verification1;
   let v2 = data.verification2;
   let v3 = data.verification3;
@@ -227,6 +240,7 @@ app.post("/dashboard", moveNext, async (req, res) => {
 
 app.post("/dashboard/fail", moveNext, async (req, res) => {
   if (req.body.ans === "no") {
+    // this need to change
     return res.redirect("/");
   }
   // delete the user data from student model
