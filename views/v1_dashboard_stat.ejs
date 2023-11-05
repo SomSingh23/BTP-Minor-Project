@@ -95,11 +95,6 @@
       arc.append("path")
           .attr("d", path)
           .attr("fill", d => color(d.data.label));
-
-      arc.append("text")
-          .attr("transform", d => `translate(${path.centroid(d)})`)
-          .attr("dy", ".35em")
-          .text(d => d.data.label);
     </script>
   </body>
 </html>
