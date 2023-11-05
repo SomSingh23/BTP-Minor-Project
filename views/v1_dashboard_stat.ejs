@@ -5,9 +5,12 @@
     <title>Student Statistics</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
+      h1 {
+        text-align: center;
+        font-size: 50px;
+      }
       body {
         font-family: Arial, sans-serif;
-        display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
@@ -16,6 +19,13 @@
       .chart-container {
         display: flex;
         flex-direction: row;
+        padding: 20px;
+        border-radius: 10px;
+        height: 500px;
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
       }
 
       .legend {
@@ -39,6 +49,7 @@
     </style>
   </head>
   <body>
+    <h1>Verification 1 Statistics</h1>
     <div class="chart-container">
       <svg class="chart"></svg>
       <div class="legend">

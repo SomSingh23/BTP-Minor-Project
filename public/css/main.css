@@ -184,7 +184,9 @@ header p {
 }
 #carouselExampleSlidesOnly {
   margin-top: 50px;
-  margin-bottom: 140px;
+  margin-bottom: 105px;
+  display: block;
+  margin-left: 365px;
 }
 .registration-header {
   font-family: Arial, sans-serif;

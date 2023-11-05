@@ -270,11 +270,27 @@ app.get("/v1_dashboard/rejected", moveAdmin, moveAdmin1, async (req, res) => {
   res.send("working on this route v1 dashboard rejected");
 });
 app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
+  let data = await Student.find({});
+  let registered = data.length;
+  data = await Student.find({
+    verification1: true,
+    verification1Status: process.env.STATUS,
+  });
+  let verified = data.length;
+  data = await Student.find({
+    verification1: false,
+    verification1Status: { $ne: process.env.STATUS },
+  });
+  let rejected = data.length;
+  let pending = registered - verified - rejected;
+  console.log(
+    `Registered = ${registered}, verifie =  ${verified}, rejected =  ${rejected}, pending =  ${pending}}`
+  );
   const studentStats = [
-    { label: "Registered", value: 100 },
-    { label: "Verified", value: 50 },
-    { label: "Rejected", value: 10 },
-    { label: "Pending", value: 47 },
+    { label: "Registered", value: registered },
+    { label: "Verified", value: verified },
+    { label: "Rejected", value: rejected },
+    { label: "Pending", value: pending },
   ];
   let somcolor = ["#1f77b4", "#2ca02c", "#d62728", "#ff7f0e"];
 
