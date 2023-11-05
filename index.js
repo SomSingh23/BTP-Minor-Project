@@ -252,7 +252,7 @@ app.post("/dashboard/fail", moveNext, async (req, res) => {
   // delete the user data from student model
   console.log(req.body);
   await Student.findOneAndDelete({ googleId: req.user.googleId });
-  return res.redirect("/dashboard");
+  return res.redirect("/student/register");
 });
 // highly___protected/admin routes starts from here  //
 app.get("/login", (req, res) => {
@@ -264,7 +264,21 @@ app.get("/v1_dashboard", moveAdmin, moveAdmin1, async (req, res) => {
   res.render("v1_dashboard");
 });
 app.get("/v1_dashboard/verified", moveAdmin, moveAdmin1, async (req, res) => {
-  res.send("working on this route v1 dashboard verified");
+  let data = await Student.find({});
+  let registered = data.length;
+  data = await Student.find({
+    verification1: true,
+    verification1Status: process.env.STATUS,
+  });
+  let verified = data.length;
+  data = await Student.find({
+    verification1: false,
+    verification1Status: { $ne: process.env.STATUS },
+  });
+  let rejected = data.length;
+  let pending = registered - verified - rejected;
+
+  res.render("v1_dashboard_verified", { pending, verified });
 });
 app.get("/v1_dashboard/rejected", moveAdmin, moveAdmin1, async (req, res) => {
   res.send("working on this route v1 dashboard rejected");
@@ -294,7 +308,14 @@ app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
   ];
   let somcolor = ["#1f77b4", "#2ca02c", "#d62728", "#ff7f0e"];
 
-  res.render("v1_dashboard_stat", { studentStats, somcolor });
+  res.render("v1_dashboard_stat", {
+    studentStats,
+    somcolor,
+    registered,
+    verified,
+    rejected,
+    pending,
+  });
 });
 app.get("/v1", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});

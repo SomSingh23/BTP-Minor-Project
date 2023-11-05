@@ -1,0 +1,40 @@
+<!-- studentGraph.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <style>
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+      margin-top: 50px;
+    }
+  </style>
+  <body>
+    <h1><%=(verified)/(verified+pending)*100%>% Student Verified</h1>
+    <canvas id="studentChart" width="500" height="150"></canvas>
+
+    <script>
+
+      const registrations = <%- JSON.stringify(pending) %>;
+      const verifications = <%- JSON.stringify(verified) %>;
+
+      const ctx = document.getElementById('studentChart').getContext('2d');
+      const chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Pending', 'V1 Verified'],
+              datasets: [
+                  {
+                      label: 'Count of Student Pending for V1 Registration vs Count of Student Whose Verification 1 is Verified',
+                      data: [registrations, verifications],
+                      backgroundColor: ['blue', 'green'],
+                  },
+              ],
+          },
+      });
+    </script>
+  </body>
+</html>
