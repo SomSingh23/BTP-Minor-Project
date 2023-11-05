@@ -182,3 +182,7 @@ header p {
 .site-footer p {
   margin: 0;
 }
+#carouselExampleSlidesOnly {
+  margin-top: 140px;
+  margin-bottom: 140px;
+}

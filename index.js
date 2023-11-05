@@ -100,6 +100,15 @@ app.listen(process.env.PORT, () => {
 
 app.get(
   "/auth/google",
+  (req, res, next) => {
+    if (req.user === undefined) {
+      next();
+    } else if (req.user.googleId === undefined) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  },
   passport.authenticate("google", {
     scope: ["profile", "email"],
   })

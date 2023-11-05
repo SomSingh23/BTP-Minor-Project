@@ -12,3 +12,4 @@ let create = async (username, password, _adminNo) => {
   let data = await User.register(newUser, password);
   console.log(data);
 };
+// create admin
