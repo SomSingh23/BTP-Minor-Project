@@ -193,9 +193,11 @@ app.get("/student/register", moveNext, async (req, res) => {
     });
   }
 
-  res.send(
-    "Already filled the form!!! kindly wait for the verification till then you can check the status"
-  );
+  res
+    .status(200)
+    .send(
+      "Already filled the form!!! kindly wait for the verification till then you can check the status"
+    );
 });
 
 app.get("/student/status", moveNext, async (req, res) => {
@@ -564,6 +566,14 @@ app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
 // v3 routes end here
 app.post(
   "/login",
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return res.send(
+        "already logged in kindly logout first and then login to v1/v2/v3"
+      );
+    }
+    next();
+  },
   (req, res, next) => {
     res.locals.userWant = req.session.kahaPer || "/";
     next();

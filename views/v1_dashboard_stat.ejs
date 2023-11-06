@@ -57,10 +57,12 @@
 
     <div class="chart-container">
       <div class="stats">
-        <p>Number of Student Register: <%=registered%></p>
-        <p>Number of Student Pending: <%=pending%></p>
-        <p>Number of Student Rejected: <%=rejected%></p>
-        <p>Number of Student Verfied: <%=verified%></p>
+        <p style="color: #1f77b4">Number of Student Register: <b><%=registered%></b></p>
+        <p style="color: #2ca02c">Number of Student Verfied: <b><%=verified%></b></p>
+        <p style="color: #d62728">Number of Student Rejected: <b><%=rejected%></b></p>
+        <p style="color: #ff7f0e">Number of Student Pending: <b><%=pending%></b></p>
+      
+        
       </div>
       <svg class="chart"></svg>
       <div class="legend">
