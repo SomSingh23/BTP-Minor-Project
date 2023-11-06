@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<%-include('partials/header')%>
     <title>Pending vs V1 Verified</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
@@ -10,8 +8,12 @@
       margin-bottom: 50px;
       margin-top: 50px;
     }
+    footer{
+        margin-top: 50px;
+      }
   </style>
   <body>
+    <%-include('partials/navbar')%>
     <h1><%=(verified)/(verified+pending)*100%>% Student Verified</h1>
     <canvas id="studentChart" width="500" height="150"></canvas>
 
@@ -35,5 +37,6 @@
           },
       });
     </script>
+     <%-include('partials/footer')%>
   </body>
 </html>

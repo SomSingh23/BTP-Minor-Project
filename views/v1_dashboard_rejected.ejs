@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<%-include('partials/header')%>
     <title>Rejected vs V1 Verified</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
@@ -10,7 +8,11 @@
       margin-bottom: 50px;
       margin-top: 50px;
     }
+    footer{
+        margin-top: 50px;
+      }
   </style>
+   <%-include('partials/navbar')%>
   <body>
     <h1>Rejected/Verified Ratio = <%=(rejected)/(verified)%></h1>
     <canvas id="studentChart" width="500" height="150"></canvas>
@@ -35,5 +37,6 @@
           },
       });
     </script>
+    <%-include('partials/footer')%>
   </body>
 </html>
