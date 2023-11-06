@@ -40,7 +40,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 1000 * 60 * 15, httpOnly: true },
+    cookie: { maxAge: 1000 * 60 * 30, httpOnly: true },
     store: new RedisStore({ client: redis_client }),
     /* store: MongoStore.create({
       mongoUrl: process.env.CONNECT_MONGODB,
@@ -180,17 +180,13 @@ app.get("/student/register", moveNext, async (req, res) => {
     });
   }
 
-  res
-    .status(200)
-    .send(
-      "Already filled the form!!! kindly wait for the verification till then you can check the status"
-    );
+  res.status(200).render("student_form_already_filled", { category: 0 });
 });
 
 app.get("/student/status", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
   if (data === null) {
-    return res.send("kindly fill the form first");
+    return res.render("student_form_not_filled", { category: 0 });
   }
   let v1 = data.verification1;
   let v2 = data.verification2;
@@ -217,7 +213,6 @@ app.get("/student/profile", moveNext, async (req, res) => {
   } catch (err) {
     res.status(400).render("error_404");
   }
-  res.send("working on profile section");
 });
 app.get("/student/how_to_register", moveNext, async (req, res) => {
   res.render("student_how_to_register", { category: 0 });

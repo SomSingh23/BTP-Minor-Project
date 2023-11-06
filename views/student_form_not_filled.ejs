@@ -1,6 +1,6 @@
 <%-include('partials/header')%>
     <title>
-       Form Already Filled
+       Form Not Filled
     </title>
     <style>
       body {
@@ -24,7 +24,7 @@
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 350px;
-        margin: 200px auto;
+        margin: 230px auto;
         padding: 20px;
       }
 
@@ -34,14 +34,12 @@
       }
 
       p {
-        
         font-size: 18px;
-        
         margin-bottom: 20px;
       }
 
       footer{
-        margin-top: 100px;
+        margin-top: 550px;
       }
     </style>
   </head>
@@ -49,8 +47,8 @@
     <%-include('partials/navbar')%>
     <div class="modal" id="myModal">
       <div class="modal-content">
-        <h1>Form Already Filled</h1>
-        <p>You have already filled out the form; kindly check the verification status.</p>
+        <h1>Registration Form Not Filled</h1>
+        <p>Kindly fill out registration form to check status.</p>
         <p style="color: red;">Redirecting to dashboard in <span id="countdown">5</span>....</p>
        
       </div>
