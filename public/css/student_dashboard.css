@@ -6,22 +6,24 @@ body {
 }
 
 .heading {
+  margin-top: 20px;
   background-color: #333;
   color: white;
   padding: 20px;
   font-size: 25px;
   text-align: center;
-  border: 1px solid rgb(152, 143, 143);
+  border: 2px solid rgb(122, 111, 111);
 }
 
 .option {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: start;
   flex-wrap: wrap;
   margin: 20px;
   margin-top: 50px;
+  margin-left: 558px;
 }
 
 .option a {
