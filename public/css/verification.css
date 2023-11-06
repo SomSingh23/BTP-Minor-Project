@@ -6,7 +6,7 @@ h2 {
 }
 
 body {
-  font-family: "Open Sans", Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: #f5f5f5;
   text-align: center;
   margin: 20px;
@@ -31,13 +31,12 @@ h2 {
   max-width: 70%;
 }
 .top {
-  font-family: "Kaushan Script", cursive;
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 60px;
 }
 h1,
 h2 {
-  font-family: "Open Sans", Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h2.successful {
@@ -52,35 +51,6 @@ h2.pending {
   border-color: #ef2913f0;
 }
 
-.logout_div {
-  text-align: center;
-  margin: 40px auto;
-  max-width: 80%;
-}
-
-.logout_div h1 a {
-  background-color: #000000;
-  color: #fff;
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.logout_div h1 a:hover {
-  background-color: #d32f2f;
-}
-.last_one {
-  width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-
-  display: flex;
-  flex-direction: row;
-}
 @media screen and (max-width: 768px) {
   .top {
     font-size: 35px;

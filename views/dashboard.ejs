@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/icon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/icon/android-chrome-512x512.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/icon/android-chrome-192x192.png"
-    />
-    <link rel="manifest" href="/icon/site.webmanifest" />
+<%-include('partials/header')%>
     <link rel="stylesheet" href="/css/dashboard.css" />
     <title>DashBoard | Register</title>
   </head>
   <body>
+    <%-include('partials/navbar')%>
     <% if(userFirstTime){ %>
     <h1>Form show hoga</h1>
 
@@ -91,9 +70,6 @@
       <button type="submit">Submit</button>
     </form>
     <%}%>
-
-    <div class="logout_div">
-      <h1><a href="/logout">Logout</a></h1>
-    </div>
+    <%-include('partials/footer')%>
   </body>
 </html>

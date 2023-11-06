@@ -1,38 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verification</title>
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/icon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/icon/android-chrome-512x512.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/icon/android-chrome-192x192.png"
-    />
-    <link rel="manifest" href="/icon/site.webmanifest" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Lato:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/verification.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Playfair+Display:wght@500&display=swap"
-      rel="stylesheet"
-    />
+ 
+ <%-include('partials/header')%>
+ <link
+ href="https://fonts.googleapis.com/css2?family=Maven+Pro&family=Montserrat:wght@300&display=swap"
+ rel="stylesheet"
+/>
+ <link rel="stylesheet" href="/css/verification.css" />
+   
   </head>
   <body>
     <h1 class="top">Verification Status</h1>
@@ -55,13 +28,5 @@
       <h2 class="pending">Verification 3 Pending</h2>
     </div>
     <%}%>
-    <div class="last_one">
-      <div class="logout_div">
-        <h1><a href="/">Home</a></h1>
-      </div>
-      <div class="logout_div">
-        <h1><a href="/logout">Logout</a></h1>
-      </div>
-    </div>
   </body>
 </html>

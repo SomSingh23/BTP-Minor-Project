@@ -175,7 +175,7 @@ app.post("/logout", logoutNext, (req, res) => {
   });
 });
 app.get("/dashboard", moveNext, async (req, res) => {
-  res.render("student_dashboard", { category: 0 });
+  res.render("student_dashboard", { category: 0, name: req.user.username });
 });
 app.get("/student/register", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
@@ -185,7 +185,12 @@ app.get("/student/register", moveNext, async (req, res) => {
   let username = req.user.username;
   if (data === null) {
     userFirstTime = false;
-    return res.render("dashboard", { userFirstTime, username, userEmail });
+    return res.render("dashboard", {
+      userFirstTime,
+      username,
+      userEmail,
+      category: 0,
+    });
   }
 
   res.send(
