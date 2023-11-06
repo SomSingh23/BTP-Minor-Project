@@ -161,19 +161,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/logout", logoutNext, (req, res) => {
-  res.render("logout");
-});
-app.post("/logout", logoutNext, (req, res) => {
-  console.log("logout post route called");
-  req.logout((err) => {
-    if (err) {
-      return res.status(400).send("error");
-    } else {
-      res.redirect("/");
-    }
-  });
-});
 app.get("/dashboard", moveNext, async (req, res) => {
   res.render("student_dashboard", { category: 0, name: req.user.username });
 });
@@ -285,9 +272,14 @@ app.post("/dashboard/fail", moveNext, async (req, res) => {
 app.get(
   "/login",
   (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() === true) {
       let category = checkAdmin(req);
-      return res.render("already_log",{category});
+      if (category === 0) {
+        return res.redirect("/dashboard");
+      } else {
+        let returnUrl = `/v${category}_dashboard`;
+        return res.redirect(returnUrl);
+      }
     }
     next();
   },
@@ -574,6 +566,19 @@ app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
   res.redirect("/v3");
 });
 // v3 routes end here
+// login route
+app.get("/logout", logoutNext, (req, res) => {
+  res.render("logout");
+});
+app.post("/logout", logoutNext, (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return res.status(400).send("error");
+    } else {
+      res.redirect("/");
+    }
+  });
+});
 app.post(
   "/login",
   (req, res, next) => {

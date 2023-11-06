@@ -1,5 +1,7 @@
 <%-include('partials/header')%>
-    <title>Logged In</title>
+    <title>
+       Form Already Filled
+    </title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -36,18 +38,6 @@
         margin-bottom: 20px;
       }
 
-      .logout-button {
-        padding: 10px 20px;
-        background-color: #d9534f; /* Red color for danger */
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-        display: inline-block;
-      }
-
-      .logout-button:hover {
-        background-color: #c9302c; /* Darker red color on hover */
-      }
       footer{
         margin-top: 600px;
       }
@@ -57,14 +47,14 @@
     <%-include('partials/navbar')%>
     <div class="modal" id="myModal">
       <div class="modal-content">
-        <h1>You are already logged in</h1>
-        <p>Kindly logout to avoid seeing this message.</p>
-        <a href="/logout" class="logout-button">Logout</a>
+        <h1>You have Already Filled the Form</h1>
+        <p>Kindly Check Status.</p>
+       
       </div>
     </div>
 
     <script>
-      // JavaScript to show the modal
+      
       window.onload = function () {
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
