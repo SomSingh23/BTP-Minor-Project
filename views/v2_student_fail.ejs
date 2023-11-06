@@ -3,7 +3,8 @@
     <title>Verification 2 Failed</title>
   </head>
   <body>
-    <div class="success">
+    <%-include('partials/navbar')%>
+    <div class="sub_class"> <div class="success">
       <h1>Verification 1 has passed</h1>
     </div>
     <div class="fail">
@@ -16,10 +17,12 @@
     <div class="restart">
       <h3>Do you want to fill the form again and restart the process?</h3>
     </div>
+   
 
     <form action="/dashboard/fail" method="post">
       <button name="ans" value="yes">Yes</button>
       <button name="ans" value="no">No</button>
-    </form>
+    </form></div>
+    <%-include('partials/footer')%>
   </body>
 </html>

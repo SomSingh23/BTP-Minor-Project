@@ -1,14 +1,4 @@
-body,
-h1,
-h2,
-h3,
-p,
-button {
-  margin: 0;
-  padding: 0;
-}
-
-body {
+.sub_class {
   font-family: "Arial", sans-serif;
   background-color: #f2f2f2;
   display: flex;
@@ -74,6 +64,7 @@ body {
 }
 
 form {
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -8,6 +8,7 @@
    
   </head>
   <body>
+    <%-include('partials/navbar')%>
     <h1 class="top">Verification Status</h1>
     <% if(v1){ %>
     <div class="v1">
@@ -22,11 +23,12 @@
       <h2 class="pending">Verification 2 Pending</h2>
     </div>
     <%}%> <% if(v3){ %>
-    <div class="v3">
+    <div class="v3" >
       <h2 class="successful">Verification 3 Successful</h2>
       <%} else{ %>
       <h2 class="pending">Verification 3 Pending</h2>
     </div>
     <%}%>
+    <%-include('partials/footer')%>
   </body>
 </html>

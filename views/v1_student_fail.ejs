@@ -3,7 +3,8 @@
     <title>Verification 1 failed</title>
   </head>
   <body>
-    <div class="fail">
+    <%-include('partials/navbar')%>
+    <div class="sub_class"> <div class="fail">
       <h1>Verification 1 has failed</h1>
     </div>
     <div class="reason">
@@ -17,6 +18,7 @@
     <form action="/dashboard/fail" method="post">
       <button name="ans" value="yes">Yes</button>
       <button name="ans" value="no">No</button>
-    </form>
+    </form></div>
+   <%-include('partials/footer')%>
   </body>
 </html>

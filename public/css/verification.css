@@ -9,7 +9,6 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #f5f5f5;
   text-align: center;
-  margin: 20px;
 }
 /* hiding scrollbar */
 ::-webkit-scrollbar {
@@ -18,7 +17,7 @@ body {
 /* hiding scrollbar */
 h1 {
   color: #000000;
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 h2 {
@@ -28,7 +27,7 @@ h2 {
   border: 2px solid #ddd;
   border-radius: 12px;
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.747);
-  max-width: 70%;
+  max-width: 65%;
 }
 .top {
   font-family: "Montserrat", sans-serif;
@@ -38,7 +37,10 @@ h1,
 h2 {
   font-family: "Montserrat", sans-serif;
 }
-
+h1 {
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
 h2.successful {
   background-color: #4caf50;
   color: #fff;
@@ -50,7 +52,9 @@ h2.pending {
   color: #fff;
   border-color: #ef2913f0;
 }
-
+footer {
+  margin-top: 100px;
+}
 @media screen and (max-width: 768px) {
   .top {
     font-size: 35px;

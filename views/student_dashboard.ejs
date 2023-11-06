@@ -1,17 +1,21 @@
-<%-include('partials/header2')%>
+<%-include('partials/header')%>
+<link rel="stylesheet" href="/css/student_dashboard.css">
     <title>Dashboard</title>
   </head>
   <body>
-    <h1><%=name%> Dashboard</h1>
-    <a href="/student/register"><h2>Register for this semester</h2></a>
-    <a href="/student/status"><h2>Show Status</h2></a>
+    <%-include('partials/navbar')%>
+    <p class="heading"><%=name%> Dashboard</p>
+    <div class="option">    <a href="/student/register"><h2>Register for this semester</h2></a>
+      <a href="/student/status"><h2>Show Status</h2></a>
+  
+      <a href="/student/profile"><h2>Profile</h2></a>
+  
+      <a href="/student/how_to_register">
+        
+          <h2>How to register for this semester</h2>
+       </a
+      ></div>
 
-    <a href="/student/profile"><h2>Profile</h2></a>
-
-    <a href="/student/how_to_register">
-      <div class="how_to_register">
-        <h2>How to register for this semester</h2>
-      </div></a
-    >
+    <%-include('partials/footer')%>
   </body>
 </html>
