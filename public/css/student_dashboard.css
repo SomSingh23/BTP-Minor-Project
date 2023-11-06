@@ -21,6 +21,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   margin: 20px;
+  margin-top: 50px;
 }
 
 .option a {
@@ -41,4 +42,7 @@ body {
 
 h2 {
   margin: 0;
+}
+footer {
+  margin-top: 80px;
 }
