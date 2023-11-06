@@ -1,36 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/icon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/icon/android-chrome-512x512.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/icon/android-chrome-192x192.png"
-    />
-    <link rel="manifest" href="/icon/site.webmanifest" />
-    <link rel="stylesheet" href="/css/v1.css" />
+<%-include('partials/header')%>
+<link rel="stylesheet" href="/css/v1.css" />
     <title>v1</title>
   </head>
   <body>
+    <%-include('partials/navbar')%>
     <h1>Pending Student Verification List</h1>
     <ol>
+      
       <% for( let x of data ) { %> <%if(!x.verification1 &&
       x.verification1Status===process.env.STATUS) { %>
       <li><a href="/v1/<%=x.googleId%>"><%=x.username%></a></li>
       <%}%> <% } %>
     </ol>
+    <%-include('partials/footer')%>
   </body>
 </html>
