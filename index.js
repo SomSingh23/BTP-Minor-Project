@@ -282,11 +282,21 @@ app.post("/dashboard/fail", moveNext, async (req, res) => {
   return res.redirect("/student/register");
 });
 // highly___protected/admin routes starts from here  //
-app.get("/login", (req, res) => {
-  // this needs alot of improvement
-  let category = checkAdmin(req);
-  res.render("login", { category });
-});
+app.get(
+  "/login",
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      let category = checkAdmin(req);
+      return res.render("already_log",{category});
+    }
+    next();
+  },
+  (req, res) => {
+    // this needs alot of improvement
+    let category = checkAdmin(req);
+    res.render("login", { category });
+  }
+);
 // admin routes
 app.get("/v1_dashboard", moveAdmin, moveAdmin1, async (req, res) => {
   res.render("v1_dashboard", { category: 1 });
@@ -567,6 +577,7 @@ app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
 app.post(
   "/login",
   (req, res, next) => {
+    // will change this later on
     if (req.isAuthenticated()) {
       return res.send(
         "already logged in kindly logout first and then login to v1/v2/v3"
