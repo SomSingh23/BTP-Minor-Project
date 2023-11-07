@@ -333,9 +333,9 @@ app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
   });
   let rejected = data.length;
   let pending = registered - verified - rejected;
-  console.log(
-    `Registered = ${registered}, verifie =  ${verified}, rejected =  ${rejected}, pending =  ${pending}}`
-  );
+  // console.log(
+  //   `Registered = ${registered}, verifie =  ${verified}, rejected =  ${rejected}, pending =  ${pending}}`
+  // );
   const studentStats = [
     { label: "Registered", value: registered },
     { label: "Verified", value: verified },
