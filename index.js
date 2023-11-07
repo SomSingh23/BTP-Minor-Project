@@ -208,7 +208,6 @@ app.get("/student/status", moveNext, async (req, res) => {
 app.get("/student/profile", moveNext, async (req, res) => {
   try {
     let data = await Profile.findOne({ googleId: req.user.googleId });
-    console.log(data);
     return res.render("student_profile", { data, category: 0 });
   } catch (err) {
     res.status(400).render("error_404");

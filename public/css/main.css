@@ -186,7 +186,6 @@ header p {
   margin-top: 50px;
   margin-bottom: 105px;
   display: block;
-  margin-left: 365px;
 }
 .registration-header {
   font-family: "Maven Pro", sans-serif;
@@ -197,4 +196,9 @@ header p {
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
+}
+.som {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
