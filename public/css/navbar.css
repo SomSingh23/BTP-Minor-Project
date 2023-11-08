@@ -45,7 +45,7 @@ p {
   font-weight: bold;
 }
 
-@media (max-width: 660px) {
+@media (max-width: 826px) {
   .navbar {
     flex-direction: column;
     text-align: center;

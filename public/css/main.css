@@ -28,7 +28,7 @@ body {
 }
 #carouselExampleSlidesOnly {
   margin-top: 50px;
-  margin-bottom: 105px;
+  margin-bottom: 98px;
   width: 700px;
 }
 .registration-header {
@@ -45,9 +45,49 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5px;
 }
 .som {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (max-width: 826px) {
+  .heading_class h1 {
+    font-size: 22px;
+    padding: 10px;
+  }
+  .carousel-item img {
+    height: 250px;
+    width: 550px;
+  }
+  #carouselExampleSlidesOnly {
+    width: 550px;
+  }
+}
+@media (max-width: 600px) {
+  .heading_class h1 {
+    font-size: 18px;
+    padding: 10px;
+  }
+  .carousel-item img {
+    height: 180px;
+    width: 400px;
+  }
+  #carouselExampleSlidesOnly {
+    width: 400px;
+  }
+}
+@media (max-width: 420px) {
+  .heading_class h1 {
+    padding: 10px;
+    font-size: 15px;
+  }
+  .carousel-item img {
+    height: 150px;
+    width: 300px;
+  }
+  #carouselExampleSlidesOnly {
+    width: 300px;
+  }
 }
