@@ -23,7 +23,6 @@ body {
   flex-wrap: wrap;
   margin: 20px;
   margin-top: 50px;
-  margin-left: 558px;
 }
 
 .option a {
@@ -47,4 +46,9 @@ h2 {
 }
 footer {
   margin-top: 80px;
+}
+#student_id {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
