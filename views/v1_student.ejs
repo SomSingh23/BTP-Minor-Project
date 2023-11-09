@@ -23,6 +23,13 @@
     />
     <link rel="manifest" href="/icon/site.webmanifest" />
     <link rel="stylesheet" href="/css/v1_student.css" />
+    <script>
+      window.onpageshow = function (event) {
+        if (event.persisted) {
+          window.location.reload();
+        }
+      };
+    </script>
   </head>
   <body>
     <h1><%= username %> Details 👇</h1>

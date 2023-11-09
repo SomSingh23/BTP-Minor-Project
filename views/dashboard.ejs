@@ -1,6 +1,13 @@
 <%-include('partials/header')%>
     <link rel="stylesheet" href="/css/dashboard.css" />
     <title>DashBoard | Register</title>
+    <script>
+      window.onpageshow = function(event) {
+              if (event.persisted) {
+                  window.location.reload();
+              }
+          };
+    </script>
   </head>
   <body>
     <%-include('partials/navbar')%>

@@ -1,6 +1,13 @@
 <%-include('partials/header')%>
     <link rel="stylesheet" href="/css/v1_student_fail.css" />
     <title>Verification 3 Failed</title>
+    <script>
+      window.onpageshow = function(event) {
+              if (event.persisted) {
+                  window.location.reload();
+              }
+          };
+    </script>
   </head>
   <body>
     <%-include('partials/navbar')%>

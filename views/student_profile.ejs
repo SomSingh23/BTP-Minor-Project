@@ -1,5 +1,12 @@
 <%-include('partials/header')%>
     <title>User Profile</title>
+    <script>
+      window.onpageshow = function(event) {
+              if (event.persisted) {
+                  window.location.reload();
+              }
+          };
+    </script>
     <style>
       h1 {
         margin-top: 90px;

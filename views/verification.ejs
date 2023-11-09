@@ -5,7 +5,13 @@
  rel="stylesheet"
 />
  <link rel="stylesheet" href="/css/verification.css" />
-   
+ <script>
+  window.onpageshow = function(event) {
+          if (event.persisted) {
+              window.location.reload();
+          }
+      };
+</script>
   </head>
   <body>
     <%-include('partials/navbar')%>
