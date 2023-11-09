@@ -367,7 +367,13 @@ app.get("/v3", moveAdmin, moveAdmin3, async (req, res) => {
 });
 app.get("/v1/:id", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
-  if (data == null) {
+  if (data === null) {
+    return res.redirect("/v1");
+  } else if (
+    data.verification1 === true ||
+    data.verification1Status !== process.env.STATUS
+  ) {
+    // this user is already verified :) or rejected :(
     return res.redirect("/v1");
   }
   res.render("v1_student", {
@@ -406,7 +412,11 @@ app.post("/v1/:id", moveAdmin, moveAdmin1, async (req, res) => {
 });
 app.get("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
-  if (data === null) {
+  if (
+    data === null ||
+    data.verification1 === true ||
+    data.verification1Status !== process.env.STATUS
+  ) {
     return res.redirect("/v1");
   }
   let username = data.username;
@@ -414,6 +424,9 @@ app.get("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
   res.render("v1_fail", { username, googleId: req.params.id, category: 1 });
 });
 app.post("/v1/:id/fail", moveAdmin, moveAdmin1, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data.verification1Status !== process.env.STATUS)
+    return res.redirect("/v1");
   await Student.updateOne(
     {
       googleId: req.params.id,
@@ -432,7 +445,11 @@ app.get("/v2_dashboard", moveAdmin, moveAdmin2, async (req, res) => {
 });
 app.get("/v2/:id", moveAdmin, moveAdmin2, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
-  if (data == null) {
+  if (
+    data === null ||
+    data.verification2 === true ||
+    data.verification2Status !== process.env.STATUS
+  ) {
     return res.redirect("/v2");
   }
   res.render("v2_student", {
@@ -471,7 +488,11 @@ app.post("/v2/:id", moveAdmin, moveAdmin2, async (req, res) => {
 });
 app.get("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
-  if (data === null) {
+  if (
+    data === null ||
+    data.verification2 === true ||
+    data.verification2Status !== process.env.STATUS
+  ) {
     return res.redirect("/v2");
   }
   let username = data.username;
@@ -479,6 +500,9 @@ app.get("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
   res.render("v2_fail", { username, googleId: req.params.id, category: 2 });
 });
 app.post("/v2/:id/fail", moveAdmin, moveAdmin2, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data.verification2Status !== process.env.STATUS)
+    return res.redirect("/v2");
   await Student.updateOne(
     {
       googleId: req.params.id,
@@ -499,7 +523,11 @@ app.get("/v3_dashboard", moveAdmin, moveAdmin3, async (req, res) => {
 });
 app.get("/v3/:id", moveAdmin, moveAdmin3, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
-  if (data == null) {
+  if (
+    data === null ||
+    data.verification3 === true ||
+    data.verification3Status !== process.env.STATUS
+  ) {
     return res.redirect("/v3");
   }
   res.render("v3_student", {
@@ -539,7 +567,11 @@ app.post("/v3/:id", moveAdmin, moveAdmin3, async (req, res) => {
 });
 app.get("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
   let data = await Student.findOne({ googleId: req.params.id });
-  if (data === null) {
+  if (
+    data === null ||
+    data.verification3 === true ||
+    data.verification3Status !== process.env.STATUS
+  ) {
     return res.redirect("/v3");
   }
   let username = data.username;
@@ -547,6 +579,9 @@ app.get("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
   res.render("v3_fail", { username, googleId: req.params.id, category: 3 });
 });
 app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
+  let data = await Student.findOne({ googleId: req.params.id });
+  if (data.verification3Status !== process.env.STATUS)
+    return res.redirect("/v3");
   await Student.updateOne(
     {
       googleId: req.params.id,

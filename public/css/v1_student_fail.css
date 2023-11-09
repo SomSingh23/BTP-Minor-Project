@@ -2,10 +2,10 @@
   font-family: "Montserrat", sans-serif;
   background-color: #f2f2f2;
   display: flex;
-  margin-top: 100px;
+  margin-top: 80px;
   justify-content: start;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   flex-direction: column;
 }
 /* hiding scrollbar */
@@ -84,4 +84,10 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+#sub_class2 {
+  margin-bottom: 50px;
+}
+#sub_class3 {
+  margin-bottom: 80px;
 }
