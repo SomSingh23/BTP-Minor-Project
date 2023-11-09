@@ -562,7 +562,13 @@ app.post("/v3/:id/fail", moveAdmin, moveAdmin3, async (req, res) => {
 // v3 routes end here
 // login route
 app.get("/logout", logoutNext, (req, res) => {
-  res.render("logout");
+  let category = checkAdmin(req);
+  let noAnswer;
+  if (category === 0) noAnswer = "/dashboard";
+  else {
+    noAnswer = `/v${category}_dashboard`;
+  }
+  res.render("logout", { category, noAnswer });
 });
 app.post("/logout", logoutNext, (req, res) => {
   req.logout((err) => {
