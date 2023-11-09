@@ -1,43 +1,52 @@
-body {
-  background-color: #f5f5f5;
+.upper_logout_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 165px;
+}
+
+.logout-container {
   text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
 }
 
 h1 {
-  padding: 10px;
-  font-size: 24px;
-  color: #333;
-  font-weight: bold;
-  margin-top: 190px;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
 }
 
-form {
-  display: inline-block;
-  margin: 0 10px;
+.logout-form {
+  margin-top: 20px;
 }
 
-button {
-  background-color: #4285f4;
+.logout-button {
+  background-color: #007bff;
   color: #fff;
-  border: none;
-  border-radius: 4px;
   padding: 10px 20px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
-  outline: none;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
-button:hover {
-  background-color: #357ae8;
+.logout-button:hover {
+  background-color: #0056b3;
 }
 
-.button-container {
-  text-align: center;
+.cancel-link {
+  text-decoration: none;
+  color: #007bff;
+  margin-top: 10px;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.cancel-link:hover {
+  text-decoration: underline;
 }
 footer {
-  margin-top: 300px;
+  margin-top: 165px;
 }

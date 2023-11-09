@@ -2,15 +2,16 @@
     <link rel="stylesheet" href="/css/logout.css" />
     <title>Logout</title>
   </head>
-  <%-include('partials/navbar')%>
   <body>
-    <h1>Are you sure you want to logout?</h1>
-    <form action="/logout" method="post">
-      <button>Yes</button>
-    </form>
-    <form action=<%=noAnswer%> method="get">
-      <button>No</button>
-    </form>
+    <%-include('partials/navbar')%>
+    <div class="upper_logout_c">  <div class="logout-container">
+      <h1>Are you sure you want to logout?</h1>
+      <form action="/logout" method="post" class="logout-form">
+        <button class="logout-button">Yes</button>
+      </form>
+      <a href="<%= noAnswer %>" class="cancel-link">No</a>
+    </div></div>
+  
+    <%-include('partials/footer')%>
   </body>
-  <%-include('partials/footer')%>
 </html>
