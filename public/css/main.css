@@ -52,6 +52,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+#count_user {
+  margin-top: 10px;
+}
 @media (max-width: 826px) {
   .heading_class h1 {
     font-size: 22px;

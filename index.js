@@ -144,7 +144,6 @@ app.get(
 
 app.get("/", async (req, res) => {
   try {
-    console.log("home page");
     let category = checkAdmin(req);
     let _ = false;
     let name = "";
@@ -163,7 +162,6 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/dashboard", moveNext, async (req, res) => {
-  console.log("studet dashboard");
   res.render("student_dashboard", { category: 0, name: req.user.username });
 });
 app.get("/student/register", moveNext, async (req, res) => {
