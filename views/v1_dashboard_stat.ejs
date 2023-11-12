@@ -1,121 +1,44 @@
 <%-include('partials/header')%>
-    <title>Student Statistics</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script>
-      window.onpageshow = function(event) {
-              if (event.persisted) {
-                  window.location.reload();
-              }
-          };
-    </script>
-    <style>
-      h1 {
-        text-align: center;
-        font-size: 50px;
-      }
-      body {
-        font-family: "Montserrat", sans-serif;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-      }
-      .chart-container {
-        display: flex;
-        flex-direction: row;
-        padding: 20px;
-        border-radius: 10px;
-        height: 500px;
-        width: 1050px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 40px;
-      }
-
-      .legend {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        margin-left: 50px;
-      }
-      .legend-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .legend-color {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-        border: 1px solid #ccc;
-      }
-      h1{
-        margin-top: 50px;
-      }
-      footer{
-        margin-top: 50px;
-      }
-    </style>
+    <title>V1 | Statistics</title>
+    <link rel="stylesheet" href="/css/v1_stat.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <%-include('partials/navbar')%>
-    <h1>Verification 1 Statistics</h1>
-
-    <div class="chart-container">
-      <div class="stats">
-        <p style="color: #1f77b4">Number of Student Register: <b><%=registered%></b></p>
-        <p style="color: #2ca02c">Number of Student Verfied: <b><%=verified%></b></p>
-        <p style="color: #d62728">Number of Student Rejected: <b><%=rejected%></b></p>
-        <p style="color: #ff7f0e">Number of Student Pending: <b><%=pending%></b></p>
-      
-        
-      </div>
-      <svg class="chart"></svg>
-      <div class="legend">
-        <% studentStats.forEach((item, index) => { %>
-        <div class="legend-item">
-          <div
-            class="legend-color"
-            style="background-color: <%= somcolor[index] %>"
-          ></div>
-          <div><%= studentStats[index].label %></div>
-        </div>
-        <% }); %>
-      </div>
+    <div class="heading">Verification 1 Statistics</div>
+    <div class = 'dchart' style="margin: auto">
+      <canvas id="doughnutChart"></canvas>
     </div>
-    <%-include('partials/footer')%>
     <script>
-      const data = <%- JSON.stringify(studentStats) %>;
+      let data = {
+        labels: <%- JSON.stringify(labels) %>,
+        datasets: [
+          {
+            data: <%- JSON.stringify(values) %>,
+            backgroundColor: <%- JSON.stringify(colors) %>,
+          },
+        ],
+      };
 
-      const width = 500;
-      const height = 500;
-      const radius = Math.min(width, height) / 2;
+      let options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: "Comprehensive Statistics for V1 Registrations",
+        },
+      };
 
-      const svg = d3.select(".chart")
-          .attr("width", width)
-          .attr("height", height)
-          .append("g")
-          .attr("transform", `translate(${width / 2},${height / 2})`);
 
-      const color = d3.scaleOrdinal(["#1f77b4", "#2ca02c", "#d62728", "#ff7f0e"]);
+      let ctx = document.getElementById("doughnutChart").getContext("2d");
 
-      const pie = d3.pie()
-          .value(d => d.value);
 
-      const path = d3.arc()
-          .outerRadius(radius - 10)
-          .innerRadius(radius - 80);
-
-      const arc = svg.selectAll(".arc")
-          .data(pie(data))
-          .enter()
-          .append("g")
-          .attr("class", "arc");
-
-      arc.append("path")
-          .attr("d", path)
-          .attr("fill", d => color(d.data.label));
+      let doughnutChart = new Chart(ctx, {
+        type: "doughnut",
+        data: data,
+        options: options,
+      });
     </script>
+     <%-include('partials/footer')%>
   </body>
 </html>

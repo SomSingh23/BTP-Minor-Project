@@ -1,0 +1,21 @@
+.heading {
+  color: #454545;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.dchart {
+  height: 460px;
+  width: 460px;
+}
+footer {
+  margin-top: 65px;
+}
+@media screen and (max-width: 450px) {
+  .dchart {
+    height: 300px;
+    width: 300px;
+  }
+}

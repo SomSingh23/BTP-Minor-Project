@@ -332,26 +332,11 @@ app.get("/v1_dashboard/stastics", moveAdmin, moveAdmin1, async (req, res) => {
   });
   let rejected = data.length;
   let pending = registered - verified - rejected;
-  // console.log(
-  //   `Registered = ${registered}, verifie =  ${verified}, rejected =  ${rejected}, pending =  ${pending}}`
-  // );
-  const studentStats = [
-    { label: "Registered", value: registered },
-    { label: "Verified", value: verified },
-    { label: "Rejected", value: rejected },
-    { label: "Pending", value: pending },
-  ];
-  let somcolor = ["#1f77b4", "#2ca02c", "#d62728", "#ff7f0e"];
+  const colors = ["#3498db", "#2ecc71", "#e74c3c", "#f39c12"];
+  const labels = ["Registered", "Verified", "Rejceted", "Pending"];
+  const values = [registered, verified, rejected, pending];
 
-  res.render("v1_dashboard_stat", {
-    studentStats,
-    somcolor,
-    registered,
-    verified,
-    rejected,
-    pending,
-    category: 1,
-  });
+  res.render("v1_dashboard_stat", { labels, values, colors, category: 1 });
 });
 app.get("/v1", moveAdmin, moveAdmin1, async (req, res) => {
   let data = await Student.find({});
