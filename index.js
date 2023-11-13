@@ -22,6 +22,7 @@ let moveAdmin2 = require("./utils/middleware/moveAdmin2");
 let moveAdmin3 = require("./utils/middleware/moveAdmin3");
 let moveAdmin = require("./utils/middleware/moveAdmin");
 let Profile = require("./models/profile");
+let flash = require("connect-flash");
 // const MongoStore = require("connect-mongo"); no longer needed to store session :) might use in future
 mongoose
   .connect(process.env.CONNECT_MONGODB)
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, "views")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
+app.use(flash());
 app.use(
   session({
     secret: process.env.SECRET,
@@ -116,8 +118,6 @@ app.get(
   (req, res, next) => {
     if (req.user === undefined) {
       next();
-    } else if (req.user.googleId === undefined) {
-      next();
     } else {
       res.redirect("/");
     }
@@ -128,6 +128,12 @@ app.get(
 );
 app.get(
   "/google/api/auth",
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return res.redirect("/");
+    }
+    next();
+  },
   (req, res, next) => {
     let redirectTo = req.session.kahaPer || "/";
     res.locals.redirectTo = redirectTo;
