@@ -24,7 +24,7 @@
   </style>
    <%-include('partials/navbar')%>
   <body>
-    <h1>Rejected/Verified Ratio = <%=(rejected)/(verified)%></h1>
+    <h1>Rejected/Verified Ratio = <%=((rejected)/(verified)).toFixed(2)%></h1>
     <canvas id="studentChart" width="500" height="150"></canvas>
 
     <script>

@@ -24,7 +24,7 @@
   </style>
   <body>
     <%-include('partials/navbar')%>
-    <h1><%=(verified)/(verified+pending)*100%>% Student Verified</h1>
+    <h1><%=((verified)/(verified+pending)*100).toFixed(2)%>% Student Verified</h1>
     <canvas id="studentChart" width="500" height="150"></canvas>
 
     <script>
