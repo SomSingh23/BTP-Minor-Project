@@ -55,6 +55,21 @@ body {
 #count_user {
   margin-top: 10px;
 }
+.flash-container {
+  font-family: "Varela Round", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  background-color: #b9fca1;
+  color: rgb(0, 0, 0);
+  border-bottom: 1px solid #c2edb2;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+  padding: 5px;
+}
 @media (max-width: 826px) {
   .heading_class h1 {
     font-size: 22px;
@@ -66,6 +81,9 @@ body {
   }
   #carouselExampleSlidesOnly {
     width: 550px;
+  }
+  .flash-container {
+    font-size: 18px;
   }
 }
 @media (max-width: 600px) {
@@ -80,11 +98,14 @@ body {
   #carouselExampleSlidesOnly {
     width: 400px;
   }
+  .flash-container {
+    font-size: 16px;
+  }
 }
 @media (max-width: 420px) {
   .heading_class h1 {
     padding: 10px;
-    font-size: 15px;
+    font-size: 16px;
   }
   .carousel-item img {
     height: 150px;
@@ -92,5 +113,8 @@ body {
   }
   #carouselExampleSlidesOnly {
     width: 300px;
+  }
+  .flash-container {
+    font-size: 15px;
   }
 }

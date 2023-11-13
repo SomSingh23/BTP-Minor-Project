@@ -1,0 +1,14 @@
+<% if (message[0]) { %>
+<div class="flash-container" id="flash-container"><%= message %></div>
+<script>
+  setTimeout(function () {
+    const flashContainer = document.getElementById("flash-container");
+    flashContainer.style.opacity = "0";
+
+    // Wait for the fade-out transition to complete before hiding
+    setTimeout(function () {
+      flashContainer.style.display = "none";
+    }, 250);
+  }, 1500);
+</script>
+<% } %>

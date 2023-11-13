@@ -32,11 +32,11 @@ mongoose
   .catch((e) => console.log(e));
 
 app.set("view engine", "ejs");
+app.use(flash());
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
-app.use(flash());
 app.use(
   session({
     secret: process.env.SECRET,
@@ -50,7 +50,13 @@ app.use(
     }) */
   })
 );
+// message flash middleware
 
+app.use((req, res, next) => {
+  res.locals.message = req.flash("message");
+  next();
+});
+// message flash middleware ends
 // -------------------------Auth----------------------------------- //
 
 app.use(passport.initialize());
@@ -142,6 +148,7 @@ app.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   function (req, res) {
     // Successful authentication, Now redirect .
+    req.flash("message", "Student login successful. Welcome aboard!"); // flashing message :)
     res.redirect(res.locals.redirectTo);
   }
 );
@@ -168,7 +175,10 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/dashboard", moveNext, async (req, res) => {
-  res.render("student_dashboard", { category: 0, name: req.user.username });
+  return res.render("student_dashboard", {
+    category: 0,
+    name: req.user.username,
+  });
 });
 app.get("/student/register", moveNext, async (req, res) => {
   let data = await Student.findOne({ googleId: req.user.googleId });
@@ -242,6 +252,7 @@ app.post("/dashboard", moveNext, async (req, res) => {
       ...req.body,
     });
     await newStudent.save();
+    req.flash("message", "Registration form submitted successfully."); // flashing message :)
     res.redirect("/dashboard");
     try {
       let message = await formSubmitMessage(req.user.username); // always resolved

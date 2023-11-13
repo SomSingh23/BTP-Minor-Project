@@ -16,8 +16,11 @@ body {
 }
 /* hiding scrollbar */
 h1 {
-  color: #000000;
+  color: #272727;
   margin: 30px 0;
+}
+.top {
+  letter-spacing: 2px;
 }
 
 h2 {
