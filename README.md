@@ -1,7 +1,46 @@
-<h1><a herf="https://btp-5-iiitp.onrender.com">BTP-Minor-Project</a></h1>
-<br>
+# B.Tech Minor Project: College Registration Automation
 
-## STUDENT PORTAL
+[Deployment Link](https://btp-5-iiitp.onrender.com/)
+
+## Overview
+
+This repository houses the B.Tech minor project aimed at automating the registration process within our college. The existing registration system has been traditional and time-consuming, prompting the development of a streamlined portal accessible to both administrators and students.
+
+## Features
+
+- **User Authentication:** Students log in using their IIIT Pune college Gmail IDs, gaining access to their user profile and a comprehensive registration guide upon successful Google sign-up.
+
+- **Registration Form Submission:** Students are required to fill out a registration form, and the project incorporates multiple levels of verification (v1, v2, and v3). The process advances through each level sequentially.
+
+- **Admin Portal:** Administrators have access to various features, including student verification, statistical data visualization (overall statistics, charts comparing verified vs. pending, and rejected vs. verified cases).
+
+- **Email Notification:** Upon successful registration, students receive a welcome email.
+
+## Security and Robustness
+
+The project prioritizes security and robustness by implementing isolation for each independent portal. To bypass protective measures, users must undergo verification and pass through multiple middlewares.
+
+## Technology Stack
+
+The technology stack for this project includes:
+
+- Redis
+- MongoDB
+- Express
+- Node.js
+- Nodemailer
+- Passport.js
+- D3.js
+- Chart.js
+- EJS
+
+## Motivation
+
+The primary motivation behind this project is to streamline and modernize the registration process for students at IIIT Pune, replacing the traditional and time-consuming methods with an efficient and user-friendly portal.
+
+Feel free to explore the project and provide feedback or contribute to its development!
+
+# Student Portal
 <br>
 
 ![image](https://github.com/SomSingh23/BTP-Minor-Project/assets/91485305/ad8f69a6-01ae-4cf2-9f88-d1578b787e40)
@@ -29,7 +68,7 @@
 
 <br>
 
-## V1 Admin PORTAL
+# V1 Admin Portal
 <br>
 
 ![image](https://github.com/SomSingh23/BTP-Minor-Project/assets/91485305/25b23df4-6593-4a06-b23b-1d1ae900a2a8)
