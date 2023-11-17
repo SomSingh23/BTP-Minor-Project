@@ -612,6 +612,7 @@ app.post("/logout", logoutNext, (req, res) => {
     if (err) {
       return res.status(400).send("error");
     } else {
+      req.flash("message", "Logout successful. See you soon!");
       res.redirect("/");
     }
   });
