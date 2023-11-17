@@ -63,3 +63,6 @@ button {
 button:hover {
   background-color: #357ae8;
 }
+footer {
+  margin-top: 55px;
+}
