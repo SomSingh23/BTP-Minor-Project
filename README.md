@@ -1,4 +1,5 @@
-# B.Tech Minor Project: College Registration Automation
+![BTP-Minor-Project](https://socialify.git.ci/SomSingh23/BTP-Minor-Project/image?description=1&descriptionEditable=Streamlining%20Student%20Enrollment%20with%20an%20Automated%20System%C2%A0for%C2%A0IIIT%C2%A0Pune.&font=Raleway&forks=1&name=1&owner=1&pattern=Floating%20Cogs&stargazers=1&theme=Dark)
+
 
 [Deployment Link](https://btp-5-iiitp.onrender.com/)
 
