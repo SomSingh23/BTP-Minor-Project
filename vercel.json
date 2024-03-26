@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "name": "som-singh-lodhi btp 5th semester",
+  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }]
+}
