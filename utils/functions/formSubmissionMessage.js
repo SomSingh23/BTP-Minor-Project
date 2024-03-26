@@ -93,7 +93,7 @@ let formSubmitMessage = (username) => {
                 <p>Thank you for choosing us!</p>
             </div>
             <div class="footer">
-                <p>&copy; 2023 Som Singh Lodhi</p>
+                <p>&copy; 2024 Som Singh Lodhi</p>
             </div>
         </div>
     </body>
