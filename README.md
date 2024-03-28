@@ -25,7 +25,7 @@ The project prioritizes security and robustness by implementing isolation for ea
 
 username: `admin1`
 password: `admin1`
-
+- Please utilize the provided username and password to access the features of V1Admin.
 ## Technology Stack
 
 The technology stack for this project includes:
