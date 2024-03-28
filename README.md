@@ -21,6 +21,11 @@ This repository houses the B.Tech minor project aimed at automating the registra
 
 The project prioritizes security and robustness by implementing isolation for each independent portal. To bypass protective measures, users must undergo verification and pass through multiple middlewares.
 
+## V1Admin Password
+
+username: `admin1`
+password: `admin1`
+
 ## Technology Stack
 
 The technology stack for this project includes:
