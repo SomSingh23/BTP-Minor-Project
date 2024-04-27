@@ -57,6 +57,10 @@ Feel free to explore the project and provide feedback or contribute to its devel
 
 <br>
 
+![image](https://github.com/SomSingh23/BTP-Minor-Project/assets/91485305/77e12c9d-43ed-4fb6-b11f-539c2e279264)
+
+<br>
+
 ![image](https://github.com/SomSingh23/BTP-Minor-Project/assets/91485305/1b8b6f6a-899a-4e5a-8ee5-b05e803a0ebb)
 
 <br>
